@@ -22,7 +22,7 @@
         .m-name { font-weight: 900; font-size: 16px; color: #333; margin-bottom: 5px; }
         .m-res { font-weight: 900; font-size: 20px; color: var(--vip-red); }
 
-        /* CHART CONTAINER - BILKUL SAAF AUR NORMAL STYLES */
+        /* CHART CONTAINER - SAAF AUR NORMAL STYLES */
         .chart-wrapper { width: 90%; margin: 10px auto; }
         .chart-container { background: #fff; border: 1px solid #000; overflow-x: auto; }
         
@@ -60,15 +60,18 @@
         .timer-display { font-size: 32px; font-weight: bold; color: var(--vip-red); margin: 15px 0; letter-spacing: 2px; }
         .success-msg { color: green; font-size: 22px; font-weight: bold; margin: 20px 0; }
 
-        /* FLOATING SOCIAL BUTTONS STYLES */
+        /* FLOATING SOCIAL BUTTONS WITH REAL LOGOS */
         .social-sticky { position: fixed; bottom: 20px; left: 15px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
-        .btn-social { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.3); font-size: 20px; border: none; cursor: pointer; }
+        .btn-social { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 8px rgba(0,0,0,0.3); border: none; cursor: pointer; transition: transform 0.2s; }
+        .btn-social:active { transform: scale(0.9); }
         .btn-whatsapp { background: #25D366; }
         .btn-telegram { background: #0088cc; }
+        .btn-social svg { width: 28px; height: 28px; fill: white; }
 
-        /* SCROLL BUTTONS STYLES */
+        /* SCROLL BUTTONS WITH TEXT AND ARROWS */
         .scroll-sticky { position: fixed; bottom: 20px; right: 15px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
-        .btn-scroll { width: 45px; height: 45px; border-radius: 50%; background: var(--dark-blue); color: var(--gold); border: 2px solid var(--gold); font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; }
+        .btn-scroll { width: 85px; height: 42px; border-radius: 8px; background: var(--dark-blue); color: var(--gold); border: 2px solid var(--gold); font-weight: bold; font-size: 10px; font-family: sans-serif; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.2; text-transform: uppercase; }
+        .btn-scroll span { font-size: 12px; }
     </style>
 </head>
 <body>
@@ -91,7 +94,6 @@
 
 <div id="liveMarketContainer"></div>
 
-<!-- CHART WRAPPER (SABKO SAAF DIKHEGA AB) -->
 <div class="chart-wrapper">
     <div class="chart-container">
         <table class="vip-table">
@@ -106,11 +108,9 @@
     </div>
 </div>
 
-<!-- REMOVE LOCK BUTTON BELOW THE CHART -->
 <button class="btn-unlock-trigger" id="unlockTriggerBtn" onclick="openStep1()">🔓 REMOVE LOCK</button>
 
 
-<!-- STEP 1 MODAL: NAME & NUMBER -->
 <div class="modal-overlay" id="modalStep1">
     <div class="modal-content">
         <h3>Unlock VIP Chart</h3>
@@ -122,7 +122,6 @@
     </div>
 </div>
 
-<!-- STEP 2 MODAL: SUBSCRIPTION PLANS -->
 <div class="modal-overlay" id="modalStep2">
     <div class="modal-content">
         <h3>VIP Subscription Plans</h3>
@@ -141,13 +140,11 @@
     </div>
 </div>
 
-<!-- STEP 3 MODAL: SCANNER & UTR INPUT -->
 <div class="modal-overlay" id="modalStep3">
     <div class="modal-content">
         <h3 id="planHeading">Pay ₹599</h3>
         <p style="font-size:13px; color:#666;">Neeche diye QR code ko scan karke pay karein</p>
         
-        <!-- QR CODE PLACEHOLDER -->
         <div class="qr-placeholder">
             <span>[ QR CODE SCANNER ]</span>
             <span style="font-size:9px; margin-top:10px; color:#666;">Yahan apna QR Code image lagayein</span>
@@ -159,32 +156,37 @@
     </div>
 </div>
 
-<!-- STEP 4 MODAL: TIMER & SUCCESS -->
 <div class="modal-overlay" id="modalStep4">
     <div class="modal-content">
         <h3>Payment Verification</h3>
         <p style="font-size:13px; color:#555;">Kripya 2 minute prateeksha karein, aapka payment verify ho raha hai...</p>
         
-        <!-- TIMER DISPLAY -->
         <div class="timer-display" id="timerBox">02:00</div>
         
-        <!-- SUCCESS MSG ACTION -->
         <div id="successBox" class="success-msg" style="display:none;">🎉 SUCCESS!</div>
         <button class="btn-close" id="timerCloseBtn" onclick="closeAllModals()" style="display:none;">Close</button>
     </div>
 </div>
 
 
-<!-- LEFT SIDE: SOCIAL BUTTONS -->
 <div class="social-sticky">
-    <a href="https://wa.me/918103982813?text=Hello%20Master%20VIP" target="_blank" class="btn-social btn-whatsapp" title="WhatsApp">WA</a>
-    <a href="https://t.me/YourUsername" target="_blank" class="btn-social btn-telegram" title="Telegram">TG</a>
+    <a href="https://wa.me/918103982813?text=Hello%20Master%20VIP" target="_blank" class="btn-social btn-whatsapp" title="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.948 0c3.179.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.597-5.339 11.946-11.89 11.946-.193 0-.387-.002-.58-.005L0 24zm6.066-13.435c-.13-.217-.482-.347-.98-.596-.497-.248-2.338-1.155-2.698-1.286-.36-.131-.62-.196-.88.195-.26.391-1.008 1.286-1.233 1.547-.225.26-.45.293-.948.044-.497-.249-2.102-.775-4.004-2.472-1.48-1.32-2.48-2.949-2.77-3.446-.29-.497-.031-.766.218-1.014.224-.223.497-.58.746-.871.248-.29.332-.497.497-.83.166-.333.083-.622-.042-.871-.124-.249-1.008-2.43-1.382-3.326-.363-.873-.733-.756-1.008-.77l-.859-.014c-.296 0-.776.111-1.18.552-.404.441-1.544 1.511-1.544 3.682 0 2.171 1.58 4.268 1.802 4.563.222.295 3.108 4.746 7.528 6.657 1.052.454 1.873.725 2.514.929 1.057.336 2.021.289 2.783.175.849-.127 2.338-.957 2.666-1.884.328-.927.328-1.721.23-1.884z"/></svg>
+    </a>
+    <a href="https://t.me/YourUsername" target="_blank" class="btn-social btn-telegram" title="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161l-1.875 8.835c-.141.628-.512.784-1.037.492l-2.859-2.107-1.378 1.327c-.153.153-.282.282-.577.282l.205-2.915 5.306-4.794c.23-.205-.05-.319-.358-.114l-6.558 4.128-2.825-.884c-.614-.192-.627-.614.128-.91l11.036-4.254c.512-.186.96.119.789.916z"/></svg>
+    </a>
 </div>
 
-<!-- RIGHT SIDE: SCROLL BUTTONS -->
 <div class="scroll-sticky">
-    <button onclick="scrollToTop()" class="btn-scroll" title="Go to Top">▲</button>
-    <button onclick="scrollToBottom()" class="btn-scroll" title="Go to Bottom">▼</button>
+    <button onclick="scrollToTop()" class="btn-scroll" title="Go to Top">
+        <span>▲</span>
+        GO TO TOP
+    </button>
+    <button onclick="scrollToBottom()" class="btn-scroll" title="Go to Bottom">
+        <span>▼</span>
+        GO BOTTOM
+    </button>
 </div>
 
 <script>
