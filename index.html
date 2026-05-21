@@ -8,22 +8,19 @@
         body { background: #FFBF82; font-family: sans-serif; text-align: center; margin: 0; padding-bottom: 50px; }
         .header { background: #1a024d; padding: 15px; color: #FFD700; font-weight: bold; }
         
-        /* 4 Line Description */
         .desc { background: #fff; width: 90%; margin: 15px auto; padding: 10px; border-left: 5px solid #e31e24; text-align: left; }
         .desc ul { padding-left: 20px; font-size: 14px; margin: 0; }
 
-        /* Master VIP Box */
         .vip-box { background: #000; width: 90%; margin: 15px auto; padding: 15px; border: 2px solid #FFD700; border-radius: 10px; color: #fff; }
         
-        /* Market List (Name Top, Result Bottom, Center) */
         .market-list { width: 90%; margin: 15px auto; }
         .row { background: #fff; border: 1px solid #ddd; margin-bottom: 8px; padding: 10px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; }
         .name { font-weight: 900; font-size: 16px; color: #333; margin-bottom: 5px; }
         .res { font-weight: 900; font-size: 20px; color: #e31e24; }
 
-        /* Chart */
+        /* Chart Styles */
         #chartWrapper { width: 90%; margin: 15px auto; background: #fff; border: 1px solid #000; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; }
+        table { width: 100%; border-collapse: collapse; min-width: 300px; }
         td { border: 1px solid #000; height: 40px; text-align: center; font-weight: bold; }
     </style>
 </head>
@@ -45,19 +42,19 @@
     <div id="vipResult" style="font-size: 30px; font-weight: 900;">---</div>
 </div>
 
-<div class="market-list" id="liveContainer">
-    <!-- Results will load here -->
-</div>
+<div class="market-list" id="liveContainer"></div>
 
 <div id="chartWrapper">
     <table id="chartTable"></table>
 </div>
 
 <script>
-    // Live Market Data
-    const url = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Live&v=" + Math.random();
+    const v = Math.random();
+    const LIVE_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Live&v=" + v;
+    const CHART_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart&v=" + v;
 
-    fetch(url).then(r => r.text()).then(data => {
+    // Load Live Results
+    fetch(LIVE_URL).then(r => r.text()).then(data => {
         const rows = data.split('\n');
         let html = '';
         rows.forEach(row => {
@@ -65,7 +62,6 @@
             if(cols.length < 2) return;
             let name = cols[0].replace(/"/g, '').trim();
             let res = cols[1].replace(/"/g, '').trim();
-            
             if(name.toUpperCase().includes("MASTER VIP")) {
                 document.getElementById('vipResult').innerText = res;
             } else {
@@ -73,6 +69,17 @@
             }
         });
         document.getElementById('liveContainer').innerHTML = html;
+    });
+
+    // Load Chart
+    fetch(CHART_URL).then(r => r.text()).then(data => {
+        const rows = data.split('\n');
+        let html = '';
+        rows.forEach(row => {
+            let cols = row.split(',');
+            html += '<tr>' + cols.map(c => `<td>${c.replace(/"/g, '')}</td>`).join('') + '</tr>';
+        });
+        document.getElementById('chartTable').innerHTML = html;
     });
 </script>
 
