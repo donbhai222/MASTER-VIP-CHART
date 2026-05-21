@@ -11,6 +11,11 @@
         .header { background: var(--dark-blue); padding: 10px; border-bottom: 3px solid var(--gold); }
         .header h1 { margin: 0; font-size: 18px; color: var(--gold); text-transform: uppercase; }
 
+        /* RUNNING NOTIFICATION STYLE */
+        .ticker-wrap { width: 100%; background: #000; color: #fff; padding: 6px 0; border-bottom: 2px solid var(--gold); font-family: sans-serif; font-size: 13px; font-weight: bold; overflow: hidden; }
+        .ticker-wrap marquee { vertical-align: middle; }
+        .ticker-wrap span { color: var(--gold); margin: 0 10px; }
+
         .desc { background: #fff; width: 90%; margin: 15px auto; padding: 10px; border-left: 5px solid var(--vip-red); text-align: left; }
         .desc ul { padding-left: 20px; font-size: 14px; margin: 0; }
 
@@ -28,7 +33,7 @@
         
         .vip-table { border-collapse: collapse; width: 100%; min-width: 320px; table-layout: fixed; }
         .vip-table th { background: #ffff00; color: #000; font-size: 10px; padding: 6px 0; border: 1px solid #000; }
-        .vip-table td { border: 1px solid #000; height: 50px; background: #fff; vertical-align: middle; text-align: center; padding: 0; }
+        .vip-table td { border: 1px solid #000; height: 50px; background: #fff; vertical-align: middle; text-align: center; padding: 0; position: relative; }
         
         /* DATE CELL - FIXED FOR 2 LINES */
         .date-cell { background: #f0f0f0 !important; font-size: 11px; font-weight: bold; width: 65px !important; line-height: 1.3; white-space: normal; padding: 4px !important; text-align: center; }
@@ -38,6 +43,11 @@
         /* BIGGER CHART NUMBERS */
         .j-main { font-size: 22px; font-weight: 900; color: #000; margin: 0 5px; }
         .highlight-red .j-main, .highlight-red .p-vertical { color: var(--vip-red) !important; }
+
+        /* SINGLE LOCK CELL STYLE */
+        .single-lock-cell { background: #fff5f5 !important; cursor: pointer; animation: flashBg 2s infinite; }
+        .lock-overlay { font-size: 18px; color: var(--vip-red); font-weight: bold; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+        @keyframes flashBg { 0% { background: #fff5f5; } 50% { background: #ffe0e0; } 100% { background: #fff5f5; } }
 
         /* LOCK TRIGGER BUTTON BELOW CHART */
         .btn-unlock-trigger { background: var(--vip-red); color: white; font-size: 16px; font-weight: bold; border: 2px solid var(--gold); padding: 12px 25px; border-radius: 30px; cursor: pointer; margin: 15px auto; display: block; box-shadow: 0 4px 10px rgba(0,0,0,0.3); animation: pulse 1.5s infinite; }
@@ -83,6 +93,12 @@
 
 <div class="header"><h1>MASTER VIP CHART</h1></div>
 
+<div class="ticker-wrap">
+    <marquee behavior="scroll" direction="left" scrollamount="5">
+        ⚠️ ध्यान दें: मास्टर VIP चार्ट का आज का लीक गेम तैयार है! <span>💥 100% फिक्स जोड़ी और अचूक पट्टी उपलब्ध है। 💥</span> हमारी सर्विस सबसे तेज़ और सबसे भरोसेमंद है। लीक गेम देखने के लिए नीचे दिए गए 'REMOVE LOCK' बटन पर क्लिक करें या सीधे WhatsApp / Telegram पर संपर्क करें। <span>🔥 आज ही जुड़ें और अपना सारा लॉस कवर करें! 🔥</span>
+    </marquee>
+</div>
+
 <div class="desc">
     <ul>
         <li>सबसे तेज़ और सटीक रिजल्ट यहाँ उपलब्ध हैं।</li>
@@ -99,7 +115,6 @@
 
 <div id="liveMarketContainer"></div>
 
-<!-- CHART WRAPPER -->
 <div class="chart-wrapper">
     <div class="chart-container">
         <table class="vip-table">
@@ -114,11 +129,9 @@
     </div>
 </div>
 
-<!-- REMOVE LOCK BUTTON BELOW THE CHART -->
 <button class="btn-unlock-trigger" id="unlockTriggerBtn" onclick="openStep1()">🔓 REMOVE LOCK</button>
 
 
-<!-- STEP 1 MODAL: NAME & NUMBER -->
 <div class="modal-overlay" id="modalStep1">
     <div class="modal-content">
         <h3>Unlock VIP Chart</h3>
@@ -130,7 +143,6 @@
     </div>
 </div>
 
-<!-- STEP 2 MODAL: SUBSCRIPTION PLANS -->
 <div class="modal-overlay" id="modalStep2">
     <div class="modal-content">
         <h3>VIP Subscription Plans</h3>
@@ -149,13 +161,11 @@
     </div>
 </div>
 
-<!-- STEP 3 MODAL: SCANNER & UTR INPUT -->
 <div class="modal-overlay" id="modalStep3">
     <div class="modal-content">
         <h3 id="planHeading">Pay ₹599</h3>
         <p style="font-size:13px; color:#666;">Neeche diye QR code ko scan karke pay karein</p>
         
-        <!-- UPDATED FILE NAME HERE FOR GITHUB -->
         <div class="qr-wrapper">
             <img src="paytm-qr.png.jpeg" alt="UPI QR Code">
         </div>
@@ -166,23 +176,19 @@
     </div>
 </div>
 
-<!-- STEP 4 MODAL: TIMER & SUCCESS -->
 <div class="modal-overlay" id="modalStep4">
     <div class="modal-content">
         <h3>Payment Verification</h3>
         <p style="font-size:13px; color:#555;">Kripya 2 minute prateeksha karein, aapka payment verify ho raha hai...</p>
         
-        <!-- TIMER DISPLAY -->
         <div class="timer-display" id="timerBox">02:00</div>
         
-        <!-- SUCCESS MSG ACTION -->
         <div id="successBox" class="success-msg" style="display:none;">🎉 SUCCESS!</div>
         <button class="btn-close" id="timerCloseBtn" onclick="closeAllModals()" style="display:none;">Close</button>
     </div>
 </div>
 
 
-<!-- LEFT SIDE: SOCIAL BUTTONS WITH REAL SVG LOGOS -->
 <div class="social-sticky">
     <a href="https://wa.me/918103982813?text=Hello%20Master%20VIP" target="_blank" class="btn-social btn-whatsapp" title="WhatsApp">
         <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.948 0c3.179.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.597-5.339 11.946-11.89 11.946-.193 0-.387-.002-.58-.005L0 24zm6.066-13.435c-.13-.217-.482-.347-.98-.596-.497-.248-2.338-1.155-2.698-1.286-.36-.131-.62-.196-.88.195-.26.391-1.008 1.286-1.233 1.547-.225.26-.45.293-.948.044-.497-.249-2.102-.775-4.004-2.472-1.48-1.32-2.48-2.949-2.77-3.446-.29-.497-.031-.766.218-1.014.224-.223.497-.58.746-.871.248-.29.332-.497.497-.83.166-.333.083-.622-.042-.871-.124-.249-1.008-2.43-1.382-3.326-.363-.873-.733-.756-1.008-.77l-.859-.014c-.296 0-.776.111-1.18.552-.404.441-1.544 1.511-1.544 3.682 0 2.171 1.58 4.268 1.802 4.563.222.295 3.108 4.746 7.528 6.657 1.052.454 1.873.725 2.514.929 1.057.336 2.021.289 2.783.175.849-.127 2.338-.957 2.666-1.884.328-.927.328-1.721.23-1.884z"/></svg>
@@ -192,7 +198,6 @@
     </a>
 </div>
 
-<!-- RIGHT SIDE: SCROLL BUTTONS WITH ARROWS AND WRITTEN TEXT -->
 <div class="scroll-sticky">
     <button onclick="scrollToTop()" class="btn-scroll" title="Go to Top">
         <span>▲</span>
@@ -229,19 +234,62 @@
     fetch(CHART_URL).then(r => r.text()).then(data => {
         const rows = data.split('\n').filter(r => r.trim() !== '').map(r => r.split(','));
         let html = '';
-        for(let i=1; i<rows.length; i++) {
+        
+        let totalRows = rows.length;
+        let lastRowWithData = 1;
+        let lastColWithData = 1;
+        
+        // Step 1: Last updated filled cell search
+        for(let i = 1; i < totalRows; i++) {
+            for(let j = 1; j <= 16; j += 3) {
+                let jd = (rows[i][j+1] || "").trim().replace(/"/g, '');
+                if(jd !== "" && jd !== "-") {
+                    lastRowWithData = i;
+                    lastColWithData = j;
+                }
+            }
+        }
+
+        // Step 2: Next target cell logic for single lock
+        let lockRow = lastRowWithData;
+        let lockCol = lastColWithData + 3;
+
+        if (lockCol > 16) {
+            lockCol = 1;
+            lockRow = lastRowWithData + 1;
+        }
+
+        // Step 3: Render Table loop
+        for(let i = 1; i < totalRows; i++) {
             let d = (rows[i][0] || "").trim().replace(/"/g, '');
             html += `<tr><td class="date-cell">${d}</td>`;
-            for(let j=1; j<=16; j+=3) {
-                let lp=(rows[i][j]||"").trim().replace(/"/g, ''), jd=(rows[i][j+1]||"").trim().replace(/"/g, ''), rp=(rows[i][j+2]||"").trim().replace(/"/g, '');
-                let isRed = (jd.length==2 && (jd[0]==jd[1] || Math.abs(jd[0]-jd[1])==5));
-                html += `<td class="${isRed?'highlight-red':''}">
-                    <div class="cell-wrap">
-                        <div class="p-vertical">${lp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
-                        <div class="j-main">${jd}</div>
-                        <div class="p-vertical">${rp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
-                    </div>
-                </td>`;
+            
+            for(let j = 1; j <= 16; j += 3) {
+                let lp = (rows[i][j]||"").trim().replace(/"/g, ''), 
+                    jd = (rows[i][j+1]||"").trim().replace(/"/g, ''), 
+                    rp = (rows[i][j+2]||"").trim().replace(/"/g, '');
+                
+                let isRed = (jd.length == 2 && (jd[0] == jd[1] || Math.abs(jd[0] - jd[1]) == 5));
+                
+                // SINGLE NEXT CELL LOCKED
+                if (i === lockRow && j === lockCol) {
+                    html += `<td class="single-lock-cell" onclick="openStep1()">
+                        <div class="lock-overlay">🔒 VIP</div>
+                    </td>`;
+                } 
+                else {
+                    if (jd !== "" && jd !== "-") {
+                        html += `<td class="${isRed?'highlight-red':''}">
+                            <div class="cell-wrap">
+                                <div class="p-vertical">${lp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
+                                <div class="j-main">${jd}</div>
+                                <div class="p-vertical">${rp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
+                            </div>
+                        </td>`;
+                    } else {
+                        html += `<td></td>`;
+                    }
+                }
             }
             html += `</tr>`;
         }
