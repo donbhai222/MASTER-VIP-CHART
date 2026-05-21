@@ -11,7 +11,6 @@
         .header { background: var(--dark-blue); padding: 10px; border-bottom: 3px solid var(--gold); }
         .header h1 { margin: 0; font-size: 18px; color: var(--gold); text-transform: uppercase; }
 
-        /* 4 Line Description Section */
         .special-note { background: #fff; padding: 12px; margin: 15px auto; width: 90%; border-left: 5px solid var(--vip-red); border-radius: 4px; text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .special-note ul { margin: 0; padding-left: 18px; font-size: 13px; color: #333; line-height: 1.6; }
 
@@ -19,12 +18,11 @@
         .vip-title { color: var(--gold); font-size: 12px; font-weight: bold; }
         .vip-result { color: #fff; font-size: 28px; font-weight: 900; }
 
-        /* Live Market Section */
-        #liveResults { background: #fff; margin: 10px auto; width: 90%; border: 2px solid var(--vip-red); border-radius: 5px; padding: 10px; }
-        #liveDataContainer { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
-        .live-item { background: #fdf2f2; padding: 8px; border: 1px solid #ddd; border-radius: 3px; }
-        .market-name { font-size: 9px; font-weight: bold; color: #555; }
-        .market-res { font-size: 16px; color: red; font-weight: 900; }
+        /* Updated List Layout for 10 Markets */
+        #liveResults { width: 90%; margin: 10px auto; text-align: left; }
+        .live-row { display: flex; justify-content: space-between; border-bottom: 1px solid #c78040; padding: 8px 0; font-size: 14px; }
+        .market-name { font-weight: bold; color: #333; }
+        .market-res { font-weight: 900; color: var(--vip-red); }
 
         /* Chart Layout */
         #chartWrapper { width: 90%; margin: 10px auto; background: #fff; border: 1px solid #000; overflow-x: auto; }
@@ -59,7 +57,7 @@
 </div>
 
 <div id="liveResults">
-    <h3 style="margin: 0; color: var(--vip-red); font-size: 14px;">LIVE MARKET RESULTS</h3>
+    <h3 style="margin-bottom: 10px; color: var(--vip-red); font-size: 16px; text-align: center;">LIVE MARKET RESULTS</h3>
     <div id="liveDataContainer"></div>
 </div>
 
@@ -91,7 +89,7 @@
                 if(name.toUpperCase().includes("MASTER VIP")) {
                     document.getElementById('vipResultVal').innerText = res;
                 } else {
-                    html += `<div class="live-item"><div class="market-name">${name}</div><div class="market-res">${res}</div></div>`;
+                    html += `<div class="live-row"><span class="market-name">${name}</span><span class="market-res">${res}</span></div>`;
                 }
             });
             document.getElementById('liveDataContainer').innerHTML = html;
