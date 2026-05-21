@@ -2,106 +2,114 @@
 <html lang="hi">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>MASTER VIP CHART</title>
     <style>
-        body { background: #FFBF82; font-family: sans-serif; text-align: center; margin: 0; padding-bottom: 120px; }
-        .marquee { background: #000; color: #FFD700; padding: 10px; font-weight: bold; border-bottom: 2px solid #e31e24; }
+        :root { --dark-blue: #1a024d; --gold: #FFD700; --vip-red: #e31e24; }
+        body { background: #FFBF82; font-family: 'Arial Narrow', sans-serif; text-align: center; margin: 0; padding-bottom: 50px; }
         
-        .vip-main { background: #1a024d; color: #FFD700; padding: 20px; font-size: 22px; font-weight: bold; border-bottom: 5px solid #FFD700; }
+        .header { background: var(--dark-blue); padding: 10px; border-bottom: 3px solid var(--gold); }
+        .header h1 { margin: 0; font-size: 18px; color: var(--gold); text-transform: uppercase; }
+
+        .desc { background: #fff; width: 90%; margin: 15px auto; padding: 10px; border-left: 5px solid var(--vip-red); text-align: left; }
+        .desc ul { padding-left: 20px; font-size: 14px; margin: 0; }
+
+        .master-box { background: #000; margin: 15px auto; width: 90%; padding: 10px; border: 2px solid var(--gold); border-radius: 10px; box-shadow: 0 0 10px var(--gold); }
+        .master-title { color: var(--gold); font-size: 12px; font-weight: bold; }
+        .master-val { color: #fff; font-size: 28px; font-weight: 900; }
+
+        .market-row { background: #fff; border: 1px solid #ddd; margin: 5px auto; width: 90%; padding: 10px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; }
+        .m-name { font-weight: 900; font-size: 16px; color: #333; margin-bottom: 5px; }
+        .m-res { font-weight: 900; font-size: 20px; color: var(--vip-red); }
+
+        /* NEW STYLE NAMES TO FORCE UPDATE */
+        .chart-container { width: 90%; margin: 10px auto; background: #fff; border: 1px solid #000; overflow-x: auto; }
+        .vip-table { border-collapse: collapse; width: 100%; min-width: 300px; table-layout: fixed; }
+        .vip-table th { background: #ffff00; color: #000; font-size: 10px; padding: 6px 0; border: 1px solid #000; }
+        .vip-table td { border: 1px solid #000; height: 50px; background: #fff; vertical-align: middle; text-align: center; padding: 0; }
         
-        /* 10 Market Layout - Professional Table */
-        .chart-section { width: 95%; margin: 20px auto; background: #fff; padding: 10px; border-radius: 10px; overflow-x: auto; }
-        .vip-table { width: 100%; border-collapse: collapse; }
-        .vip-table td { border: 1px solid #000; padding: 12px; text-align: center; font-weight: bold; font-size: 16px; }
-        
-        .pay-section { background: #fff; width: 90%; margin: 20px auto; padding: 20px; border-radius: 10px; border: 2px solid #1a024d; }
-        .btn { padding: 12px 25px; background: #1a024d; color: #FFD700; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        .input-field { width: 80%; padding: 10px; margin: 5px; border: 1px solid #ccc; border-radius: 5px; }
-        .box { display: none; }
-        
-        .contact-bar { position: fixed; bottom: 0; width: 100%; display: flex; }
-        .c-btn { flex: 1; padding: 12px; color: #fff; text-decoration: none; font-weight: bold; }
+        .date-cell { background: #f0f0f0 !important; font-size: 9px; font-weight: bold; width: 45px !important; }
+        .cell-wrap { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+        .p-vertical { display: flex; flex-direction: column; font-size: 8px; line-height: 0.9; width: 10px; font-weight: bold; }
+        .j-main { font-size: 16px; font-weight: 900; color: #000; margin: 0 4px; }
+        .highlight-red .j-main, .highlight-red .p-vertical { color: var(--vip-red) !important; }
     </style>
 </head>
 <body>
 
-<div class="marquee"><marquee>🔥 MASTER VIP CHART - सबसे सटीक रिजल्ट्स यहाँ देखें! 🔥</marquee></div>
+<div class="header"><h1>MASTER VIP CHART</h1></div>
 
-<!-- Main VIP Result -->
-<div class="vip-main">
-    MASTER VIP RESULT<br>
-    <span style="font-size: 35px;">78 - 345 - 89</span>
+<div class="desc">
+    <ul>
+        <li>सबसे तेज़ और सटीक रिजल्ट यहाँ उपलब्ध हैं।</li>
+        <li>एक्सपर्ट्स द्वारा तैयार किया गया VIP गेम।</li>
+        <li>100% भरोसेमंद और सुरक्षित सर्विस।</li>
+        <li>आज ही जुड़ें और जीत की शुरुआत करें।</li>
+    </ul>
 </div>
 
-<!-- Professional 10 Market Table -->
-<div class="chart-section">
-    <table class="vip-table" id="chartGrid"></table>
+<div class="master-box">
+    <div class="master-title">MASTER VIP CHART RESULT</div>
+    <div class="master-val" id="vipVal">---</div>
 </div>
 
-<!-- Payment Section -->
-<div class="pay-section">
-    <div id="step1" style="text-align: left;">
-        <h3 style="color: #e31e24;">✨ VIP मेंबरशिप प्राप्त करें:</h3>
-        <div style="font-size:40px; cursor:pointer; text-align:center;" onclick="go(2)">🔒</div>
-    </div>
-    <div id="step2" class="box">
-        <h3>अपनी जानकारी भरें</h3>
-        <input type="text" id="name" placeholder="अपना नाम" class="input-field"><br>
-        <input type="text" id="phone" placeholder="मोबाइल नंबर" class="input-field"><br>
-        <button class="btn" onclick="go(3)">आगे बढ़ें</button>
-    </div>
-    <div id="step3" class="box">
-        <h3>प्लान चुनें</h3>
-        <button class="btn" onclick="go(4)">1 दिन - ₹599</button><br><br>
-        <button class="btn" onclick="go(4)">7 दिन - ₹1499</button>
-    </div>
-    <div id="step4" class="box">
-        <h3>QR स्कैन करें</h3>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=omkaryadav@upi" alt="QR">
-        <br><input type="text" id="utr" placeholder="UTR नंबर लिखें" class="input-field"><br>
-        <button class="btn" onclick="startTimer()">सबमिट करें</button>
-    </div>
-    <div id="step5" class="box">
-        <h2 id="timer" style="color:red;">02:00</h2>
-    </div>
-</div>
+<div id="liveMarketContainer"></div>
 
-<div class="contact-bar">
-    <a href="https://wa.me/918103982813" class="c-btn" style="background:#25d366;">WhatsApp</a>
-    <a href="https://t.me/+918103982813" class="c-btn" style="background:#0088cc;">Telegram</a>
+<div class="chart-container">
+    <table class="vip-table">
+        <thead>
+            <tr>
+                <th style="width:45px;">DATE</th>
+                <th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th>
+            </tr>
+        </thead>
+        <tbody id="chartGrid"></tbody>
+    </table>
 </div>
 
 <script>
-    window.onload = loadData;
-    function go(n) {
-        document.getElementById('step1').style.display = 'none';
-        for(let i=2; i<=5; i++) document.getElementById('step'+i).style.display = 'none';
-        document.getElementById('step'+n).style.display = 'block';
-    }
-    function startTimer() {
-        go(5);
-        let t = 120;
-        let x = setInterval(() => {
-            t--;
-            document.getElementById('timer').innerText = "00:" + (t<10?"0"+t:t);
-            if(t<=0) { clearInterval(x); document.getElementById('step5').innerHTML = "<h3>✅ पेमेंट सफल! धन्यवाद।</h3>"; }
-        }, 1000);
-    }
-    function loadData() {
-        fetch("https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart&v=" + Math.random())
-        .then(r=>r.text()).then(d => {
-            let rows = d.split('\n');
-            let html = "";
-            rows.forEach(r => {
-                let cols = r.split(',');
-                html += "<tr>";
-                cols.forEach(c => { html += "<td>" + c.replace(/"/g,'') + "</td>"; });
-                html += "</tr>";
-            });
-            document.getElementById('chartGrid').innerHTML = html;
+    const v = Math.random();
+    const LIVE_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Live&v=" + v;
+    const CHART_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart&v=" + v;
+
+    fetch(LIVE_URL).then(r => r.text()).then(data => {
+        const rows = data.split('\n');
+        let html = '';
+        rows.forEach(row => {
+            let cols = row.split(',');
+            if(cols.length < 2) return;
+            let name = cols[0].replace(/"/g, '').trim();
+            let res = cols[1].replace(/"/g, '').trim();
+            if(name.toUpperCase().includes("MASTER VIP")) {
+                document.getElementById('vipVal').innerText = res;
+            } else {
+                html += `<div class="market-row"><span class="m-name">${name}</span><span class="m-res">${res}</span></div>`;
+            }
         });
-    }
+        document.getElementById('liveMarketContainer').innerHTML = html;
+    });
+
+    fetch(CHART_URL).then(r => r.text()).then(data => {
+        const rows = data.split('\n').filter(r => r.trim() !== '').map(r => r.split(','));
+        let html = '';
+        for(let i=1; i<rows.length; i++) {
+            let d = (rows[i][0] || "").trim().replace(/"/g, '');
+            html += `<tr><td class="date-cell">${d}</td>`;
+            for(let j=1; j<=16; j+=3) {
+                let lp=(rows[i][j]||"").trim().replace(/"/g, ''), jd=(rows[i][j+1]||"").trim().replace(/"/g, ''), rp=(rows[i][j+2]||"").trim().replace(/"/g, '');
+                let isRed = (jd.length==2 && (jd[0]==jd[1] || Math.abs(jd[0]-jd[1])==5));
+                html += `<td class="${isRed?'highlight-red':''}">
+                    <div class="cell-wrap">
+                        <div class="p-vertical">${lp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
+                        <div class="j-main">${jd}</div>
+                        <div class="p-vertical">${rp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
+                    </div>
+                </td>`;
+            }
+            html += `</tr>`;
+        }
+        document.getElementById('chartGrid').innerHTML = html;
+    });
 </script>
 </body>
 </html>
