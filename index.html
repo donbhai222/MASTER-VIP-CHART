@@ -11,11 +11,10 @@
         .header { background: var(--dark-blue); padding: 10px; border-bottom: 3px solid var(--gold); }
         .header h1 { margin: 0; font-size: 18px; color: var(--gold); text-transform: uppercase; }
 
-        /* 4 Line Description */
         .special-note { background: #fff; padding: 12px; margin: 10px auto; width: 90%; border-left: 5px solid var(--vip-red); border-radius: 4px; text-align: left; }
         .special-note ul { margin: 5px 0 0 0; padding-left: 15px; font-size: 12px; color: #555; }
 
-        /* Master VIP Highlight Style */
+        /* Master VIP Glowing Style */
         .master-vip-box {
             background: #000;
             margin: 15px auto;
@@ -60,13 +59,11 @@
     </ul>
 </div>
 
-<!-- Master VIP Result Section -->
 <div class="master-vip-box">
     <div class="vip-title">MASTER VIP CHART RESULT</div>
     <div class="vip-result" id="vipResultVal">---</div>
 </div>
 
-<!-- Live Market Section -->
 <div id="liveResults">
     <h3 style="margin: 0; color: var(--vip-red); font-size: 16px;">LIVE MARKET RESULTS</h3>
     <div id="liveDataContainer"></div>
@@ -84,33 +81,38 @@
 <button class="btn-pay-main" onclick="openVipModal()">JOIN VIP / लॉक खोलें 🔑</button>
 
 <script>
-    const CHART_CSV = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/export?format=csv&gid=0";
-    const LIVE_CSV = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/export?format=csv&gid=1914363886";
+    // Sheet Links
+    const LIVE_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Live";
+    const CHART_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart";
 
     async function loadData() {
-        // Live Results
-        fetch(LIVE_CSV + "&cache=" + Date.now()).then(r => r.text()).then(data => {
+        // Live Section
+        fetch(LIVE_URL + "&cache=" + Date.now()).then(r => r.text()).then(data => {
             const rows = data.split('\n').filter(r => r.trim() !== '');
             let html = '';
-            rows.forEach((row, index) => {
+            rows.forEach((row) => {
                 let cols = row.split(',');
-                if(index === 0) {
-                    document.getElementById('vipResultVal').innerText = cols[1];
-                } else if(cols.length >= 2) {
-                    html += `<div class="live-item"><div style="font-size:9px; font-weight:bold;">${cols[0]}</div><div style="font-size:14px; color:red; font-weight:900;">${cols[1]}</div></div>`;
+                if(cols.length < 2) return;
+                let name = cols[0].replace(/"/g, '').trim();
+                let res = cols[1].replace(/"/g, '').trim();
+                
+                if(name.toUpperCase() === "MASTER VIP") {
+                    document.getElementById('vipResultVal').innerText = res;
+                } else {
+                    html += `<div class="live-item"><div style="font-size:9px; font-weight:bold;">${name}</div><div style="font-size:14px; color:red; font-weight:900;">${res}</div></div>`;
                 }
             });
             document.getElementById('liveDataContainer').innerHTML = html;
         });
 
-        // Chart Data
-        fetch(CHART_CSV + "&cache=" + Date.now()).then(r => r.text()).then(data => {
+        // Chart Section
+        fetch(CHART_URL + "&cache=" + Date.now()).then(r => r.text()).then(data => {
             const rows = data.split('\n').filter(r => r.trim() !== '');
             let html = '';
             for(let i=1; i<rows.length; i++) {
                 let cols = rows[i].split(',');
-                html += `<tr><td style="background:#f0f0f0; font-size:9px;">${cols[0]}</td>`;
-                for(let j=1; j<cols.length; j++) html += `<td>${cols[j] || ''}</td>`;
+                html += `<tr><td style="background:#f0f0f0; font-size:9px;">${cols[0].replace(/"/g, '')}</td>`;
+                for(let j=1; j<cols.length; j++) html += `<td>${cols[j] ? cols[j].replace(/"/g, '') : ''}</td>`;
                 html += `</tr>`;
             }
             document.getElementById('gridData').innerHTML = html;
