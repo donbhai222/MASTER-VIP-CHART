@@ -14,22 +14,18 @@
         .header h1 { margin: 0; font-size: 20px; color: var(--gold); text-transform: uppercase; }
 
         .box { background: #fff; width: 90%; margin: 15px auto; padding: 15px; border-radius: 10px; display: none; }
-        .desc { display: block; text-align: left; border-left: 5px solid var(--vip-red); }
+        .visible { display: block; }
+        .desc { background: #fff; width: 90%; margin: 15px auto; padding: 10px; border-left: 5px solid var(--vip-red); text-align: left; }
         
         .lock-btn { font-size: 40px; cursor: pointer; margin: 20px; }
         .input-field { width: 80%; padding: 10px; margin: 5px; border: 1px solid #ccc; border-radius: 5px; }
         .btn { padding: 12px 25px; background: var(--dark-blue); color: #fff; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
         
         /* Chart Styles */
-        .chart-container { width: 90%; margin: 10px auto; background: #fff; border: 1px solid #000; overflow-x: auto; }
+        .chart-container { width: 90%; margin: 10px auto; background: #fff; border: 1px solid #000; overflow-x: auto; display: none; }
         .vip-table { border-collapse: collapse; width: 100%; }
-        .vip-table td { border: 1px solid #000; height: 60px; background: #fff; vertical-align: middle; text-align: center; padding: 0; }
-        .date-box { background: #f0f0f0 !important; font-size: 10px; font-weight: bold; width: 90px !important; }
-        .cell-content { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; gap: 2px; }
-        .p-v { display: flex; flex-direction: column; font-size: 9px; line-height: 1; width: 12px; font-weight: bold; }
-        .j-d { font-size: 19px; font-weight: 900; }
-        .red-house .j-d, .red-house .p-v { color: var(--vip-red) !important; }
-
+        .vip-table td { border: 1px solid #000; height: 50px; background: #fff; text-align: center; font-weight: bold; }
+        
         .contact-bar { position: fixed; bottom: 0; width: 100%; display: flex; }
         .c-btn { flex: 1; padding: 12px; color: #fff; text-decoration: none; font-weight: bold; font-size: 14px; }
         .wa { background: #25d366; } .tg { background: #0088cc; }
@@ -37,106 +33,83 @@
 </head>
 <body>
 
-<div class="marquee"><marquee>🚀 MASTER VIP CHART में आपका स्वागत है! जुड़ने के लिए लॉक खोलें।</marquee></div>
+<div class="marquee"><marquee>🚀 MASTER VIP CHART में आपका स्वागत है! सबसे सटीक रिजल्ट!</marquee></div>
 
 <div class="header"><h1>MASTER VIP CHART</h1></div>
 
-<div id="startSection" class="box desc" style="display:block;">
+<!-- Start Page (4-line desc + Lock) -->
+<div id="step1" class="box visible desc">
     <ul>
         <li>सबसे तेज़ और सटीक रिजल्ट यहाँ उपलब्ध हैं।</li>
         <li>एक्सपर्ट्स द्वारा तैयार किया गया VIP गेम।</li>
         <li>100% भरोसेमंद और सुरक्षित सर्विस।</li>
         <li>आज ही जुड़ें और जीत की शुरुआत करें।</li>
     </ul>
-    <div class="lock-btn" onclick="showForm()">🔒</div>
+    <div class="lock-btn" onclick="next('step2')">🔒</div>
 </div>
 
-<div id="formSection" class="box">
+<!-- Forms & Payment Steps -->
+<div id="step2" class="box">
     <h3>Enter Details</h3>
     <input type="text" id="name" placeholder="Name" class="input-field"><br>
-    <input type="text" id="phone" placeholder="Phone Number" class="input-field"><br>
-    <button class="btn" onclick="showSubscription()">Next</button>
+    <input type="text" id="phone" placeholder="Phone" class="input-field"><br>
+    <button class="btn" onclick="next('step3')">Next</button>
 </div>
 
-<div id="subSection" class="box">
+<div id="step3" class="box">
     <h3>Select Plan</h3>
-    <div onclick="showScanner()">1 Day - ₹599</div><br>
-    <div onclick="showScanner()">7 Days - ₹1499</div>
+    <div onclick="next('step4')">1 Day - ₹599</div><br>
+    <div onclick="next('step4')">7 Days - ₹1499</div>
 </div>
 
-<div id="scanSection" class="box">
+<div id="step4" class="box">
     <h3>Scan QR to Pay (Omkar Yadav)</h3>
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=omkaryadav@upi" alt="QR">
-    <br><br>
-    <input type="text" id="utr" placeholder="Enter UTR Number" class="input-field"><br>
+    <br><input type="text" id="utr" placeholder="Enter UTR Number" class="input-field"><br>
     <button class="btn" onclick="startTimer()">Submit UTR</button>
 </div>
 
-<div id="timerSection" class="box">
-    <div id="timer" style="font-size:24px; color:red;">02:00</div>
+<div id="step5" class="box">
+    <h2 id="timer">02:00</h2>
     <p>Verifying Payment...</p>
 </div>
 
-<div id="successSection" class="box">
-    <h2 style="color:green;">✅ Access Granted!</h2>
-    <button class="btn" onclick="showChart()">View Chart</button>
-</div>
-
-<div id="chartContainer" class="chart-container" style="display:none;">
+<!-- Chart Container -->
+<div id="chartContainer" class="chart-container">
     <table class="vip-table" id="chartGrid"></table>
 </div>
 
+<!-- Footer Buttons -->
 <div class="contact-bar">
     <a href="https://wa.me/918103982813" class="c-btn wa">WhatsApp</a>
     <a href="https://t.me/+918103982813" class="c-btn tg">Telegram</a>
 </div>
 
 <script>
-    function showForm() { document.getElementById('startSection').style.display='none'; document.getElementById('formSection').style.display='block'; }
-    function showSubscription() { document.getElementById('formSection').style.display='none'; document.getElementById('subSection').style.display='block'; }
-    function showScanner() { document.getElementById('subSection').style.display='none'; document.getElementById('scanSection').style.display='block'; }
-    
+    function next(id) {
+        document.querySelectorAll('.box').forEach(b => b.classList.remove('visible'));
+        document.getElementById(id).classList.add('visible');
+    }
+
     function startTimer() {
-        document.getElementById('scanSection').style.display='none';
-        document.getElementById('timerSection').style.display='block';
-        let time = 120;
+        next('step5');
+        let t = 120;
         let x = setInterval(() => {
-            time--;
-            let min = Math.floor(time/60);
-            let sec = time % 60;
-            document.getElementById('timer').innerText = "0"+min+":"+(sec<10?"0"+sec:sec);
-            if(time <= 0) {
+            t--;
+            document.getElementById('timer').innerText = "00:" + (t < 10 ? "0"+t : t);
+            if(t <= 0) {
                 clearInterval(x);
-                document.getElementById('timerSection').style.display='none';
-                document.getElementById('successSection').style.display='block';
+                document.getElementById('step5').style.display = 'none';
+                document.getElementById('chartContainer').style.display = 'block';
+                loadChart();
             }
         }, 1000);
     }
 
-    function showChart() {
-        document.getElementById('successSection').style.display='none';
-        document.getElementById('chartContainer').style.display='block';
-        loadChart();
-    }
-
     function loadChart() {
-        const CHART_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart&v=" + Math.random();
-        fetch(CHART_URL).then(r => r.text()).then(data => {
-            const rows = data.split('\n').filter(r => r.trim() !== '').map(r => r.split(','));
-            let html = '';
-            rows.forEach(row => {
-                html += `<tr><td class="date-box">${row[0].replace(/"/g, '')}</td>`;
-                for(let j=1; j<=16; j+=3) {
-                    let lp=(row[j]||"").trim().replace(/"/g, ''), jd=(row[j+1]||"").trim().replace(/"/g, ''), rp=(row[j+2]||"").trim().replace(/"/g, '');
-                    let isRed = (jd.length==2 && (jd[0]==jd[1] || Math.abs(jd[0]-jd[1])==5));
-                    html += `<td class="${isRed?'red-house':''}">
-                        <div class="cell-content"><div class="p-v">${lp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
-                        <div class="j-d">${jd}</div><div class="p-v">${rp.split('').map(n=>`<span>${n}</span>`).join('')}</div></div>
-                    </td>`;
-                }
-                html += `</tr>`;
-            });
-            document.getElementById('chartGrid').innerHTML = html;
+        const URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart&v=" + Math.random();
+        fetch(URL).then(r => r.text()).then(data => {
+            document.getElementById('chartGrid').innerHTML = data.split('\n').map(r => `<tr>${r.split(',').map(c => `<td>${c.replace(/"/g, '')}</td>`).join('')}</tr>`).join('');
         });
     }
 </script>
