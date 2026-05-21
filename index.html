@@ -13,7 +13,6 @@
         .header { background: var(--dark-blue); padding: 10px; border-bottom: 3px solid var(--gold); }
         .header h1 { margin: 0; font-size: 20px; color: var(--gold); text-transform: uppercase; }
 
-        /* 4 Line Description */
         .desc { background: #fff; width: 90%; margin: 15px auto; padding: 10px; border-left: 5px solid var(--vip-red); text-align: left; }
         .desc ul { padding-left: 20px; font-size: 14px; margin: 0; }
 
@@ -24,9 +23,16 @@
         .m-name { font-weight: bold; color: #333; }
         .m-res { font-weight: 900; font-size: 20px; color: var(--vip-red); }
 
-        .chart-container { width: 90%; margin: 10px auto; background: #fff; overflow-x: auto; }
-        .vip-table { border-collapse: collapse; width: 100%; }
-        .vip-table td { border: 1px solid #000; height: 45px; font-weight: bold; font-size: 11px; }
+        /* OLD CHART LAYOUT RESTORED */
+        .chart-container { width: 90%; margin: 10px auto; background: #fff; border: 1px solid #000; overflow-x: auto; }
+        .vip-table { border-collapse: collapse; width: 100%; min-width: 300px; table-layout: fixed; }
+        .vip-table th { background: #ffff00; color: #000; font-size: 10px; padding: 6px 0; border: 1px solid #000; }
+        .vip-table td { border: 1px solid #000; height: 50px; background: #fff; vertical-align: middle; text-align: center; padding: 0; }
+        .date-box { background: #f0f0f0 !important; font-size: 9px; font-weight: bold; width: 45px !important; }
+        .cell-content { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+        .p-v { display: flex; flex-direction: column; font-size: 8px; line-height: 0.9; width: 10px; font-weight: bold; }
+        .j-d { font-size: 16px; font-weight: 900; color: #000; margin: 0 4px; }
+        .red-house .j-d, .red-house .p-v { color: var(--vip-red) !important; }
 
         .nav-bar { position: fixed; bottom: 50px; width: 100%; display: flex; }
         .nav-btn { flex: 1; padding: 10px; background: #333; color: #FFD700; text-decoration: none; font-weight: bold; border: 1px solid #FFD700; }
@@ -60,7 +66,15 @@
 <div id="liveMarketContainer"></div>
 
 <div class="chart-container">
-    <table class="vip-table" id="chartGrid"></table>
+    <table class="vip-table">
+        <thead>
+            <tr>
+                <th style="width:45px;">DATE</th>
+                <th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th>
+            </tr>
+        </thead>
+        <tbody id="gridData"></tbody>
+    </table>
 </div>
 
 <div class="nav-bar">
@@ -95,10 +109,25 @@
     });
 
     fetch(CHART_URL).then(r => r.text()).then(data => {
-        let rows = data.split('\n');
+        const rows = data.split('\n').filter(r => r.trim() !== '').map(r => r.split(','));
         let html = '';
-        rows.forEach(r => html += '<tr>' + r.split(',').map(c => `<td>${c.replace(/"/g, '')}</td>`).join('') + '</tr>');
-        document.getElementById('chartGrid').innerHTML = html;
+        for(let i=1; i<rows.length; i++) {
+            let d = (rows[i][0] || "").trim().replace(/"/g, '');
+            html += `<tr><td class="date-box">${d}</td>`;
+            for(let j=1; j<=16; j+=3) {
+                let lp=(rows[i][j]||"").trim().replace(/"/g, ''), jd=(rows[i][j+1]||"").trim().replace(/"/g, ''), rp=(rows[i][j+2]||"").trim().replace(/"/g, '');
+                let isRed = (jd.length==2 && (jd[0]==jd[1] || Math.abs(jd[0]-jd[1])==5));
+                html += `<td class="${isRed?'red-house':''}">
+                    <div class="cell-content">
+                        <div class="p-v">${lp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
+                        <div class="j-d">${jd}</div>
+                        <div class="p-v">${rp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
+                    </div>
+                </td>`;
+            }
+            html += `</tr>`;
+        }
+        document.getElementById('gridData').innerHTML = html;
     });
 </script>
 </body>
