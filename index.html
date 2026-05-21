@@ -9,7 +9,7 @@
         :root { --dark-blue: #1a024d; --gold: #FFD700; --vip-red: #e31e24; }
         body { background: #FFBF82; font-family: 'Poppins', sans-serif; text-align: center; margin: 0; padding-bottom: 120px; }
         
-        .marquee { background: #000; color: #fff; padding: 10px; font-weight: bold; overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--gold); }
+        .marquee { background: #000; color: #fff; padding: 10px; font-weight: bold; border-bottom: 2px solid var(--gold); }
         .header { background: var(--dark-blue); padding: 10px; border-bottom: 3px solid var(--gold); }
         .header h1 { margin: 0; font-size: 20px; color: var(--gold); text-transform: uppercase; }
 
@@ -20,8 +20,16 @@
         .input-field { width: 80%; padding: 10px; margin: 5px; border: 1px solid #ccc; border-radius: 5px; }
         .btn { padding: 12px 25px; background: var(--dark-blue); color: #fff; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
         
-        #timer { font-size: 24px; color: var(--vip-red); font-weight: bold; }
-        
+        /* Chart Styles */
+        .chart-container { width: 90%; margin: 10px auto; background: #fff; border: 1px solid #000; overflow-x: auto; }
+        .vip-table { border-collapse: collapse; width: 100%; }
+        .vip-table td { border: 1px solid #000; height: 60px; background: #fff; vertical-align: middle; text-align: center; padding: 0; }
+        .date-box { background: #f0f0f0 !important; font-size: 10px; font-weight: bold; width: 90px !important; }
+        .cell-content { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; gap: 2px; }
+        .p-v { display: flex; flex-direction: column; font-size: 9px; line-height: 1; width: 12px; font-weight: bold; }
+        .j-d { font-size: 19px; font-weight: 900; }
+        .red-house .j-d, .red-house .p-v { color: var(--vip-red) !important; }
+
         .contact-bar { position: fixed; bottom: 0; width: 100%; display: flex; }
         .c-btn { flex: 1; padding: 12px; color: #fff; text-decoration: none; font-weight: bold; font-size: 14px; }
         .wa { background: #25d366; } .tg { background: #0088cc; }
@@ -29,11 +37,10 @@
 </head>
 <body>
 
-<div class="marquee"><marquee>🚀 स्वागत है! MASTER VIP CHART - सबसे सटीक और तेज़ रिजल्ट के लिए संपर्क करें।</marquee></div>
+<div class="marquee"><marquee>🚀 MASTER VIP CHART में आपका स्वागत है! जुड़ने के लिए लॉक खोलें।</marquee></div>
 
 <div class="header"><h1>MASTER VIP CHART</h1></div>
 
-<!-- 1. Start Page -->
 <div id="startSection" class="box desc" style="display:block;">
     <ul>
         <li>सबसे तेज़ और सटीक रिजल्ट यहाँ उपलब्ध हैं।</li>
@@ -42,10 +49,8 @@
         <li>आज ही जुड़ें और जीत की शुरुआत करें।</li>
     </ul>
     <div class="lock-btn" onclick="showForm()">🔒</div>
-    <p>Click Lock to Subscribe & View Chart</p>
 </div>
 
-<!-- 2. Form -->
 <div id="formSection" class="box">
     <h3>Enter Details</h3>
     <input type="text" id="name" placeholder="Name" class="input-field"><br>
@@ -53,14 +58,12 @@
     <button class="btn" onclick="showSubscription()">Next</button>
 </div>
 
-<!-- 3. Subscriptions -->
 <div id="subSection" class="box">
     <h3>Select Plan</h3>
     <div onclick="showScanner()">1 Day - ₹599</div><br>
     <div onclick="showScanner()">7 Days - ₹1499</div>
 </div>
 
-<!-- 4. Scanner -->
 <div id="scanSection" class="box">
     <h3>Scan QR to Pay (Omkar Yadav)</h3>
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=omkaryadav@upi" alt="QR">
@@ -69,16 +72,18 @@
     <button class="btn" onclick="startTimer()">Submit UTR</button>
 </div>
 
-<!-- 5. Timer -->
 <div id="timerSection" class="box">
-    <div id="timer">02:00</div>
-    <p>Verifying Payment... Please Wait</p>
+    <div id="timer" style="font-size:24px; color:red;">02:00</div>
+    <p>Verifying Payment...</p>
 </div>
 
-<!-- 6. Success -->
 <div id="successSection" class="box">
-    <h2 style="color:green;">✅ Success! Access Granted.</h2>
-    <button class="btn" onclick="location.reload()">View Chart</button>
+    <h2 style="color:green;">✅ Access Granted!</h2>
+    <button class="btn" onclick="showChart()">View Chart</button>
+</div>
+
+<div id="chartContainer" class="chart-container" style="display:none;">
+    <table class="vip-table" id="chartGrid"></table>
 </div>
 
 <div class="contact-bar">
@@ -99,13 +104,40 @@
             time--;
             let min = Math.floor(time/60);
             let sec = time % 60;
-            document.getElementById('timer').innerText = "0" + min + ":" + (sec < 10 ? "0"+sec : sec);
+            document.getElementById('timer').innerText = "0"+min+":"+(sec<10?"0"+sec:sec);
             if(time <= 0) {
                 clearInterval(x);
                 document.getElementById('timerSection').style.display='none';
                 document.getElementById('successSection').style.display='block';
             }
         }, 1000);
+    }
+
+    function showChart() {
+        document.getElementById('successSection').style.display='none';
+        document.getElementById('chartContainer').style.display='block';
+        loadChart();
+    }
+
+    function loadChart() {
+        const CHART_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart&v=" + Math.random();
+        fetch(CHART_URL).then(r => r.text()).then(data => {
+            const rows = data.split('\n').filter(r => r.trim() !== '').map(r => r.split(','));
+            let html = '';
+            rows.forEach(row => {
+                html += `<tr><td class="date-box">${row[0].replace(/"/g, '')}</td>`;
+                for(let j=1; j<=16; j+=3) {
+                    let lp=(row[j]||"").trim().replace(/"/g, ''), jd=(row[j+1]||"").trim().replace(/"/g, ''), rp=(row[j+2]||"").trim().replace(/"/g, '');
+                    let isRed = (jd.length==2 && (jd[0]==jd[1] || Math.abs(jd[0]-jd[1])==5));
+                    html += `<td class="${isRed?'red-house':''}">
+                        <div class="cell-content"><div class="p-v">${lp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
+                        <div class="j-d">${jd}</div><div class="p-v">${rp.split('').map(n=>`<span>${n}</span>`).join('')}</div></div>
+                    </td>`;
+                }
+                html += `</tr>`;
+            });
+            document.getElementById('chartGrid').innerHTML = html;
+        });
     }
 </script>
 </body>
