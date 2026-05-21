@@ -2,7 +2,7 @@
 <html lang="hi">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>MASTER VIP CHART</title>
     <style>
         :root { --dark-blue: #1a024d; --gold: #FFD700; --vip-red: #e31e24; }
@@ -11,38 +11,27 @@
         .header { background: var(--dark-blue); padding: 10px; border-bottom: 3px solid var(--gold); }
         .header h1 { margin: 0; font-size: 18px; color: var(--gold); text-transform: uppercase; }
 
-        .special-note { background: #fff; padding: 12px; margin: 10px auto; width: 90%; border-left: 5px solid var(--vip-red); border-radius: 4px; text-align: left; }
-        .special-note ul { margin: 5px 0 0 0; padding-left: 15px; font-size: 12px; color: #555; }
+        .special-note { background: #fff; padding: 10px; margin: 10px auto; width: 95%; border-left: 5px solid var(--vip-red); border-radius: 4px; text-align: left; }
+        .special-note ul { margin: 5px 0 0 0; padding-left: 15px; font-size: 11px; color: #555; }
 
-        /* Master VIP Glowing Style */
-        .master-vip-box {
-            background: #000;
-            margin: 15px auto;
-            width: 90%;
-            padding: 15px;
-            border: 2px solid var(--gold);
-            border-radius: 10px;
-            box-shadow: 0 0 15px var(--gold);
-            animation: glow 1.5s infinite alternate;
-        }
-        @keyframes glow {
-            from { box-shadow: 0 0 5px var(--gold); }
-            to { box-shadow: 0 0 20px var(--gold); }
-        }
-        .vip-title { color: var(--gold); font-size: 14px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
-        .vip-result { color: #fff; font-size: 32px; font-weight: 900; letter-spacing: 2px; }
+        .master-vip-box { background: #000; margin: 15px auto; width: 95%; padding: 10px; border: 2px solid var(--gold); border-radius: 10px; box-shadow: 0 0 10px var(--gold); }
+        .vip-title { color: var(--gold); font-size: 12px; font-weight: bold; }
+        .vip-result { color: #fff; font-size: 28px; font-weight: 900; }
 
-        /* Live Market Section */
-        #liveResults { background: #fff; margin: 10px auto; width: 90%; border: 2px solid var(--vip-red); border-radius: 5px; padding: 10px; }
-        #liveDataContainer { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
-        .live-item { background: #fdf2f2; padding: 6px; border-radius: 3px; border: 1px solid #ddd; }
+        #liveResults { background: #fff; margin: 10px auto; width: 95%; border: 2px solid var(--vip-red); border-radius: 5px; padding: 10px; }
+        #liveDataContainer { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+        .live-item { background: #fdf2f2; padding: 8px; border: 1px solid #ddd; font-size: 16px; color: red; font-weight: 900; }
         
-        /* Chart Styles */
-        #chartWrapper { width: 90%; margin: 10px auto; background: #fff; border: 1px solid #000; overflow-x: auto; }
-        table { border-collapse: collapse; width: 100%; min-width: 300px; }
-        th { background: #ffff00; font-size: 10px; padding: 6px; border: 1px solid #000; }
-        td { border: 1px solid #000; height: 40px; text-align: center; }
-        .btn-pay-main { background: var(--vip-red); color: white; padding: 12px; border: none; border-radius: 6px; width: 90%; font-weight: bold; margin: 10px 0; cursor: pointer; }
+        #chartWrapper { width: 95%; margin: 10px auto; background: #fff; border: 1px solid #000; overflow-x: auto; }
+        table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+        th { background: #ffff00; font-size: 9px; padding: 4px 1px; border: 1px solid #000; }
+        td { border: 1px solid #000; height: 45px; text-align: center; vertical-align: middle; padding: 1px; }
+        
+        .cell-content { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; line-height: 1.1; }
+        .panna-val { font-size: 8px; color: #777; }
+        .jodi-val { font-size: 11px; font-weight: bold; color: #000; }
+
+        .btn-pay-main { background: var(--vip-red); color: white; padding: 10px; border: none; border-radius: 6px; width: 95%; font-weight: bold; margin: 10px 0; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -52,10 +41,10 @@
 <div class="special-note">
     <p><strong>विशेष सूचना:</strong> मास्टर VIP चार्ट में आपका स्वागत है।</p>
     <ul>
-        <li>सबसे तेज़ और सटीक गेम रिजल्ट यहाँ उपलब्ध है।</li>
-        <li>हमारे एक्सपर्ट्स द्वारा तैयार नंबरों का लाभ उठाएं।</li>
-        <li>100% भरोसेमंद और सुरक्षित सर्विस का अनुभव करें।</li>
-        <li>आज ही VIP मेंबर बनें और जीत की शुरुआत करें।</li>
+        <li>सबसे तेज़ और सटीक रिजल्ट।</li>
+        <li>एक्सपर्ट नंबरों का लाभ उठाएं।</li>
+        <li>100% भरोसेमंद सर्विस।</li>
+        <li>आज ही VIP मेंबर बनें।</li>
     </ul>
 </div>
 
@@ -65,7 +54,7 @@
 </div>
 
 <div id="liveResults">
-    <h3 style="margin: 0; color: var(--vip-red); font-size: 16px;">LIVE MARKET RESULTS</h3>
+    <h3 style="margin: 0; color: var(--vip-red); font-size: 14px;">LIVE MARKET RESULTS</h3>
     <div id="liveDataContainer"></div>
 </div>
 
@@ -81,12 +70,10 @@
 <button class="btn-pay-main" onclick="openVipModal()">JOIN VIP / लॉक खोलें 🔑</button>
 
 <script>
-    // Sheet Links
     const LIVE_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Live";
     const CHART_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart";
 
     async function loadData() {
-        // Live Section
         fetch(LIVE_URL + "&cache=" + Date.now()).then(r => r.text()).then(data => {
             const rows = data.split('\n').filter(r => r.trim() !== '');
             let html = '';
@@ -95,24 +82,29 @@
                 if(cols.length < 2) return;
                 let name = cols[0].replace(/"/g, '').trim();
                 let res = cols[1].replace(/"/g, '').trim();
-                
                 if(name.toUpperCase() === "MASTER VIP") {
                     document.getElementById('vipResultVal').innerText = res;
                 } else {
-                    html += `<div class="live-item"><div style="font-size:9px; font-weight:bold;">${name}</div><div style="font-size:14px; color:red; font-weight:900;">${res}</div></div>`;
+                    html += `<div class="live-item">${res}</div>`;
                 }
             });
             document.getElementById('liveDataContainer').innerHTML = html;
         });
 
-        // Chart Section
         fetch(CHART_URL + "&cache=" + Date.now()).then(r => r.text()).then(data => {
             const rows = data.split('\n').filter(r => r.trim() !== '');
             let html = '';
             for(let i=1; i<rows.length; i++) {
                 let cols = rows[i].split(',');
                 html += `<tr><td style="background:#f0f0f0; font-size:9px;">${cols[0].replace(/"/g, '')}</td>`;
-                for(let j=1; j<cols.length; j++) html += `<td>${cols[j] ? cols[j].replace(/"/g, '') : ''}</td>`;
+                for(let j=1; j<cols.length; j++) {
+                    let val = cols[j] ? cols[j].replace(/"/g, '').trim() : '';
+                    let parts = val.split('-');
+                    html += `<td><div class="cell-content">
+                                <span class="panna-val">${parts[0] || ''}</span>
+                                <span class="jodi-val">${parts[1] || ''}</span>
+                             </div></td>`;
+                }
                 html += `</tr>`;
             }
             document.getElementById('gridData').innerHTML = html;
