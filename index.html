@@ -58,8 +58,10 @@
         .plan-title { font-weight: bold; font-size: 16px; color: #333; }
         .plan-price { color: var(--vip-red); font-size: 18px; font-weight: 900; margin-top: 5px; }
 
-        /* SCANNER STYLE */
-        .qr-placeholder { width: 150px; height: 150px; background: #ddd; margin: 15px auto; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #333; font-weight: bold; font-size: 12px; }
+        /* SCANNER STYLE FOR LOCAL IMAGE */
+        .qr-wrapper { width: 150px; height: 150px; margin: 15px auto; background: #fff; border: 2px dashed #333; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .qr-wrapper img { width: 100%; height: 100%; object-fit: contain; }
+        
         .timer-display { font-size: 32px; font-weight: bold; color: var(--vip-red); margin: 15px 0; letter-spacing: 2px; }
         .success-msg { color: green; font-size: 22px; font-weight: bold; margin: 20px 0; }
 
@@ -153,10 +155,9 @@
         <h3 id="planHeading">Pay ₹599</h3>
         <p style="font-size:13px; color:#666;">Neeche diye QR code ko scan karke pay karein</p>
         
-        <!-- QR CODE PLACEHOLDER -->
-        <div class="qr-placeholder">
-            <span>[ QR CODE SCANNER ]</span>
-            <span style="font-size:9px; margin-top:10px; color:#666;">Yahan apna QR Code image lagayein</span>
+        <!-- UPDATED FILE NAME HERE FOR GITHUB -->
+        <div class="qr-wrapper">
+            <img src="paytm-qr.png.jpeg" alt="UPI QR Code">
         </div>
 
         <input type="text" id="utrInput" placeholder="Enter 12-Digit UTR / Txn ID" required>
@@ -183,11 +184,9 @@
 
 <!-- LEFT SIDE: SOCIAL BUTTONS WITH REAL SVG LOGOS -->
 <div class="social-sticky">
-    <!-- WhatsApp SVG Logo -->
     <a href="https://wa.me/918103982813?text=Hello%20Master%20VIP" target="_blank" class="btn-social btn-whatsapp" title="WhatsApp">
         <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.948 0c3.179.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.597-5.339 11.946-11.89 11.946-.193 0-.387-.002-.58-.005L0 24zm6.066-13.435c-.13-.217-.482-.347-.98-.596-.497-.248-2.338-1.155-2.698-1.286-.36-.131-.62-.196-.88.195-.26.391-1.008 1.286-1.233 1.547-.225.26-.45.293-.948.044-.497-.249-2.102-.775-4.004-2.472-1.48-1.32-2.48-2.949-2.77-3.446-.29-.497-.031-.766.218-1.014.224-.223.497-.58.746-.871.248-.29.332-.497.497-.83.166-.333.083-.622-.042-.871-.124-.249-1.008-2.43-1.382-3.326-.363-.873-.733-.756-1.008-.77l-.859-.014c-.296 0-.776.111-1.18.552-.404.441-1.544 1.511-1.544 3.682 0 2.171 1.58 4.268 1.802 4.563.222.295 3.108 4.746 7.528 6.657 1.052.454 1.873.725 2.514.929 1.057.336 2.021.289 2.783.175.849-.127 2.338-.957 2.666-1.884.328-.927.328-1.721.23-1.884z"/></svg>
     </a>
-    <!-- Telegram SVG Logo -->
     <a href="https://t.me/YourUsername" target="_blank" class="btn-social btn-telegram" title="Telegram">
         <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161l-1.875 8.835c-.141.628-.512.784-1.037.492l-2.859-2.107-1.378 1.327c-.153.153-.282.282-.577.282l.205-2.915 5.306-4.794c.23-.205-.05-.319-.358-.114l-6.558 4.128-2.825-.884c-.614-.192-.627-.614.128-.91l11.036-4.254c.512-.186.96.119.789.916z"/></svg>
     </a>
