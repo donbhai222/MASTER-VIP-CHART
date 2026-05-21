@@ -13,15 +13,13 @@
 
         .vip-box { background: #000; width: 90%; margin: 15px auto; padding: 15px; border: 2px solid #FFD700; border-radius: 10px; color: #fff; }
         
-        .market-list { width: 90%; margin: 15px auto; }
-        .row { background: #fff; border: 1px solid #ddd; margin-bottom: 8px; padding: 10px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; }
+        .row { background: #fff; border: 1px solid #ddd; margin: 5px auto; width: 90%; padding: 10px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; }
         .name { font-weight: 900; font-size: 16px; color: #333; margin-bottom: 5px; }
         .res { font-weight: 900; font-size: 20px; color: #e31e24; }
 
-        /* Chart Styles */
-        #chartWrapper { width: 90%; margin: 15px auto; background: #fff; border: 1px solid #000; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; min-width: 300px; }
-        td { border: 1px solid #000; height: 40px; text-align: center; font-weight: bold; }
+        #chartWrapper { width: 90%; margin: 15px auto; background: #fff; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        td { border: 1px solid #000; height: 35px; text-align: center; font-size: 12px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -39,23 +37,22 @@
 
 <div class="vip-box">
     <div>MASTER VIP CHART RESULT</div>
-    <div id="vipResult" style="font-size: 30px; font-weight: 900;">---</div>
+    <div id="vipResult" style="font-size: 30px; font-weight: 900;">Loading...</div>
 </div>
 
-<div class="market-list" id="liveContainer"></div>
+<div id="liveContainer"></div>
 
 <div id="chartWrapper">
-    <table id="chartTable"></table>
+    <table id="chartTable"><tr><td>Loading Chart...</td></tr></table>
 </div>
 
 <script>
-    const v = Math.random();
-    const LIVE_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Live&v=" + v;
-    const CHART_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart&v=" + v;
+    const LIVE_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Live";
+    const CHART_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart";
 
-    // Load Live Results
+    // Live Results
     fetch(LIVE_URL).then(r => r.text()).then(data => {
-        const rows = data.split('\n');
+        let rows = data.split('\n');
         let html = '';
         rows.forEach(row => {
             let cols = row.split(',');
@@ -71,9 +68,9 @@
         document.getElementById('liveContainer').innerHTML = html;
     });
 
-    // Load Chart
+    // Chart
     fetch(CHART_URL).then(r => r.text()).then(data => {
-        const rows = data.split('\n');
+        let rows = data.split('\n');
         let html = '';
         rows.forEach(row => {
             let cols = row.split(',');
