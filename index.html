@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASTER VIP CHART</title>
     <style>
-        body { background: #FFBF82; font-family: sans-serif; text-align: center; margin: 0; padding-bottom: 100px; }
-        .marquee { background: #000; color: #FFD700; padding: 12px; font-weight: bold; border-bottom: 3px solid #e31e24; font-size: 18px; }
+        body { background: #FFBF82; font-family: sans-serif; text-align: center; margin: 0; padding-bottom: 120px; }
+        .marquee { background: #000; color: #FFD700; padding: 12px; font-weight: bold; border-bottom: 3px solid #e31e24; font-size: 16px; }
         
-        /* Chart Section */
-        .chart-section { width: 95%; margin: 20px auto; background: #fff; padding: 10px; border-radius: 10px; overflow-x: auto; }
-        .vip-table { width: 100%; border-collapse: collapse; }
-        .vip-table td { border: 1px solid #000; padding: 8px; text-align: center; font-weight: bold; }
+        /* 10 Market Chart Style */
+        .chart-container { width: 95%; margin: 20px auto; background: #fff; padding: 10px; border-radius: 10px; overflow-x: auto; }
+        .vip-table { border-collapse: collapse; width: 100%; }
+        .vip-table td { border: 1px solid #000; height: 50px; background: #fff; text-align: center; font-weight: bold; font-size: 12px; }
         
         /* Payment Section */
         .pay-section { background: #fff; width: 90%; margin: 20px auto; padding: 20px; border-radius: 10px; border: 2px solid #1a024d; }
-        .btn { padding: 12px 25px; background: #1a024d; color: #FFD700; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        .btn { padding: 12px 25px; background: #1a024d; color: #FFD700; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
         .input-field { width: 80%; padding: 10px; margin: 5px; border: 1px solid #ccc; border-radius: 5px; }
         .box { display: none; }
         
@@ -25,54 +25,50 @@
 </head>
 <body>
 
-<!-- Notification Patti -->
-<div class="marquee">
-    <marquee behavior="scroll" direction="left">🔥 MASTER VIP CHART - यहाँ पाएं सबसे तेज़ और सटीक रिजल्ट्स! भरोसेमंद और सुरक्षित सर्विस के लिए आज ही जुड़ें। 🔥</marquee>
-</div>
+<div class="marquee"><marquee>🔥 MASTER VIP CHART - यहाँ पाएं 10 मार्केट्स के सबसे सटीक रिजल्ट! आज ही जुड़ें। 🔥</marquee></div>
 
-<!-- 1. Result & Chart (Upar) -->
-<div class="chart-section">
-    <h2 style="color: #1a024d;">📊 मुख्य रिजल्ट चार्ट</h2>
-    <table id="chartGrid" class="vip-table"></table>
+<!-- 1. Chart Section (Sabse Upar) -->
+<div class="chart-container">
+    <h2 style="color: #1a024d; margin-top:0;">📊 10 मार्केट्स लाइव चार्ट</h2>
+    <table class="vip-table" id="chartGrid"></table>
 </div>
 
 <!-- 2. Payment Section (Neeche) -->
 <div class="pay-section">
     <div id="step1" style="text-align: left;">
-        <h3 style="color: #e31e24;">✨ प्रीमियम एक्सेस के लाभ:</h3>
-        <ul style="line-height: 1.8;">
-            <li>✅ सबसे तेज़ और भरोसेमंद रिजल्ट्स की गारंटी।</li>
-            <li>✅ अनुभवी एक्सपर्ट्स द्वारा तैयार किया गया चार्ट।</li>
-            <li>✅ 24/7 कस्टमर सपोर्ट की सुविधा।</li>
-            <li>✅ सुरक्षित और आसान पेमेंट विकल्प।</li>
+        <h3 style="color: #e31e24;">✨ प्रीमियम VIP एक्सेस:</h3>
+        <ul style="line-height: 1.6;">
+            <li>✅ 10 मार्केट्स के तेज़ रिजल्ट्स।</li>
+            <li>✅ एक्सपर्ट्स की सॉलिड गेम ट्रिक।</li>
+            <li>✅ सुरक्षित और फास्ट सर्विस।</li>
         </ul>
-        <p style="text-align:center;">नीचे दिए गए लॉक पर क्लिक करें और VIP सदस्य बनें! 👇</p>
+        <p style="text-align:center;">लॉक खोलें और पेमेंट करके चार्ट एक्सेस करें:</p>
         <div style="font-size:50px; cursor:pointer; text-align:center;" onclick="go(2)">🔒</div>
     </div>
     
     <div id="step2" class="box">
         <h3>अपनी जानकारी भरें</h3>
-        <input type="text" id="name" placeholder="अपना नाम लिखें" class="input-field"><br>
-        <input type="text" id="phone" placeholder="मोबाइल नंबर लिखें" class="input-field"><br>
+        <input type="text" id="name" placeholder="अपना नाम" class="input-field"><br>
+        <input type="text" id="phone" placeholder="मोबाइल नंबर" class="input-field"><br>
         <button class="btn" onclick="go(3)">आगे बढ़ें</button>
     </div>
 
     <div id="step3" class="box">
-        <h3>प्लान चुनें</h3>
-        <button class="btn" onclick="go(4)">1 दिन के लिए - ₹599</button><br>
-        <button class="btn" onclick="go(4)">7 दिनों के लिए - ₹1499</button>
+        <h3>सब्सक्रिप्शन प्लान</h3>
+        <button class="btn" onclick="go(4)">1 दिन - ₹599</button><br><br>
+        <button class="btn" onclick="go(4)">7 दिन - ₹1499</button>
     </div>
 
     <div id="step4" class="box">
-        <h3 style="color:green;">पेमेंट करें</h3>
+        <h3>पेमेंट (Omkar Yadav)</h3>
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=omkaryadav@upi" alt="QR">
-        <br><input type="text" id="utr" placeholder="पेमेंट UTR नंबर यहाँ डालें" class="input-field"><br>
+        <br><input type="text" id="utr" placeholder="UTR नंबर यहाँ लिखें" class="input-field"><br>
         <button class="btn" onclick="startTimer()">सबमिट करें</button>
     </div>
 
     <div id="step5" class="box">
         <h2 id="timer" style="color:red;">02:00</h2>
-        <p>पेमेंट वेरिफाई किया जा रहा है, कृपया इंतज़ार करें...</p>
+        <p>पेमेंट वेरिफाई हो रहा है...</p>
     </div>
 </div>
 
@@ -94,7 +90,7 @@
         let x = setInterval(() => {
             t--;
             document.getElementById('timer').innerText = "00:" + (t<10?"0"+t:t);
-            if(t<=0) { clearInterval(x); document.getElementById('step5').innerHTML = "<h3>✅ पेमेंट सफल! आपका एक्सेस चालू हो गया है।</h3>"; }
+            if(t<=0) { clearInterval(x); document.getElementById('step5').innerHTML = "<h3>✅ पेमेंट सफल! धन्यवाद।</h3>"; }
         }, 1000);
     }
     function loadData() {
