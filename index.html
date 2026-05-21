@@ -6,7 +6,7 @@
     <title>MASTER VIP CHART</title>
     <style>
         :root { --dark-blue: #1a024d; --gold: #FFD700; --vip-red: #e31e24; }
-        body { background: #FFBF82; font-family: 'Arial Narrow', sans-serif; text-align: center; margin: 0; padding-bottom: 50px; }
+        body { background: #FFBF82; font-family: 'Arial Narrow', sans-serif; text-align: center; margin: 0; padding-bottom: 80px; }
         
         .header { background: var(--dark-blue); padding: 10px; border-bottom: 3px solid var(--gold); }
         .header h1 { margin: 0; font-size: 18px; color: var(--gold); text-transform: uppercase; }
@@ -22,8 +22,10 @@
         .m-name { font-weight: 900; font-size: 16px; color: #333; margin-bottom: 5px; }
         .m-res { font-weight: 900; font-size: 20px; color: var(--vip-red); }
 
-        /* NEW STYLE NAMES TO FORCE UPDATE */
-        .chart-container { width: 90%; margin: 10px auto; background: #fff; border: 1px solid #000; overflow-x: auto; }
+        /* CHART CONTAINER - BILKUL SAAF AUR NORMAL STYLES */
+        .chart-wrapper { width: 90%; margin: 10px auto; }
+        .chart-container { background: #fff; border: 1px solid #000; overflow-x: auto; }
+        
         .vip-table { border-collapse: collapse; width: 100%; min-width: 300px; table-layout: fixed; }
         .vip-table th { background: #ffff00; color: #000; font-size: 10px; padding: 6px 0; border: 1px solid #000; }
         .vip-table td { border: 1px solid #000; height: 50px; background: #fff; vertical-align: middle; text-align: center; padding: 0; }
@@ -33,6 +35,40 @@
         .p-vertical { display: flex; flex-direction: column; font-size: 8px; line-height: 0.9; width: 10px; font-weight: bold; }
         .j-main { font-size: 16px; font-weight: 900; color: #000; margin: 0 4px; }
         .highlight-red .j-main, .highlight-red .p-vertical { color: var(--vip-red) !important; }
+
+        /* LOCK TRIGGER BUTTON BELOW CHART */
+        .btn-unlock-trigger { background: var(--vip-red); color: white; font-size: 16px; font-weight: bold; border: 2px solid var(--gold); padding: 12px 25px; border-radius: 30px; cursor: pointer; margin: 15px auto; display: block; box-shadow: 0 4px 10px rgba(0,0,0,0.3); animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+        /* MODAL STYLES */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 10px; box-sizing: border-box; }
+        .modal-content { background: white; padding: 20px; border-radius: 15px; width: 100%; max-width: 340px; border: 3px solid var(--dark-blue); text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .modal-content h3 { margin-top: 0; color: var(--dark-blue); }
+        .modal-content input[type="text"], .modal-content input[type="number"] { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; }
+        
+        .btn-action { background: var(--dark-blue); color: var(--gold); border: none; padding: 10px 20px; font-size: 15px; font-weight: bold; border-radius: 5px; cursor: pointer; width: 95%; margin-top: 10px; }
+        .btn-close { background: #777; color: white; margin-top: 5px; font-size: 12px; padding: 5px; width: auto; border-radius: 3px; border: none; cursor: pointer; }
+
+        /* PLAN BUTTONS */
+        .plan-box { border: 2px solid #ddd; padding: 12px; margin: 10px 0; border-radius: 8px; cursor: pointer; background: #f9f9f9; transition: 0.2s; }
+        .plan-box:hover { border-color: var(--vip-red); background: #fff5f5; }
+        .plan-title { font-weight: bold; font-size: 16px; color: #333; }
+        .plan-price { color: var(--vip-red); font-size: 18px; font-weight: 900; margin-top: 5px; }
+
+        /* SCANNER STYLE */
+        .qr-placeholder { width: 150px; height: 150px; background: #ddd; margin: 15px auto; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #333; font-weight: bold; font-size: 12px; }
+        .timer-display { font-size: 32px; font-weight: bold; color: var(--vip-red); margin: 15px 0; letter-spacing: 2px; }
+        .success-msg { color: green; font-size: 22px; font-weight: bold; margin: 20px 0; }
+
+        /* FLOATING SOCIAL BUTTONS STYLES */
+        .social-sticky { position: fixed; bottom: 20px; left: 15px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
+        .btn-social { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.3); font-size: 20px; border: none; cursor: pointer; }
+        .btn-whatsapp { background: #25D366; }
+        .btn-telegram { background: #0088cc; }
+
+        /* SCROLL BUTTONS STYLES */
+        .scroll-sticky { position: fixed; bottom: 20px; right: 15px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
+        .btn-scroll { width: 45px; height: 45px; border-radius: 50%; background: var(--dark-blue); color: var(--gold); border: 2px solid var(--gold); font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
@@ -55,16 +91,100 @@
 
 <div id="liveMarketContainer"></div>
 
-<div class="chart-container">
-    <table class="vip-table">
-        <thead>
-            <tr>
-                <th style="width:45px;">DATE</th>
-                <th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th>
-            </tr>
-        </thead>
-        <tbody id="chartGrid"></tbody>
-    </table>
+<!-- CHART WRAPPER (SABKO SAAF DIKHEGA AB) -->
+<div class="chart-wrapper">
+    <div class="chart-container">
+        <table class="vip-table">
+            <thead>
+                <tr>
+                    <th style="width:45px;">DATE</th>
+                    <th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th>
+                </tr>
+            </thead>
+            <tbody id="chartGrid"></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- REMOVE LOCK BUTTON BELOW THE CHART -->
+<button class="btn-unlock-trigger" id="unlockTriggerBtn" onclick="openStep1()">🔓 REMOVE LOCK</button>
+
+
+<!-- STEP 1 MODAL: NAME & NUMBER -->
+<div class="modal-overlay" id="modalStep1">
+    <div class="modal-content">
+        <h3>Unlock VIP Chart</h3>
+        <p style="font-size:13px; color:#666;">Kripya apni details bharein</p>
+        <input type="text" id="userName" placeholder="Apna Naam Daalein" required>
+        <input type="number" id="userPhone" placeholder="Mobile Number Daalein" required>
+        <button class="btn-action" onclick="openStep2()">Aage Badhein</button>
+        <button class="btn-close" onclick="closeAllModals()">Close</button>
+    </div>
+</div>
+
+<!-- STEP 2 MODAL: SUBSCRIPTION PLANS -->
+<div class="modal-overlay" id="modalStep2">
+    <div class="modal-content">
+        <h3>VIP Subscription Plans</h3>
+        <p style="font-size:13px; color:#666;">Koi ek plan select karein</p>
+        
+        <div class="plan-box" onclick="openStep3(599, '1 Din')">
+            <div class="plan-title">1 Din Ka Plan</div>
+            <div class="plan-price">₹599</div>
+        </div>
+        
+        <div class="plan-box" onclick="openStep3(1499, '7 Din')">
+            <div class="plan-title">7 Din Ka Plan</div>
+            <div class="plan-price">₹1499</div>
+        </div>
+        <button class="btn-close" onclick="closeAllModals()">Close</button>
+    </div>
+</div>
+
+<!-- STEP 3 MODAL: SCANNER & UTR INPUT -->
+<div class="modal-overlay" id="modalStep3">
+    <div class="modal-content">
+        <h3 id="planHeading">Pay ₹599</h3>
+        <p style="font-size:13px; color:#666;">Neeche diye QR code ko scan karke pay karein</p>
+        
+        <!-- QR CODE PLACEHOLDER -->
+        <div class="qr-placeholder">
+            <span>[ QR CODE SCANNER ]</span>
+            <span style="font-size:9px; margin-top:10px; color:#666;">Yahan apna QR Code image lagayein</span>
+        </div>
+
+        <input type="text" id="utrInput" placeholder="Enter 12-Digit UTR / Txn ID" required>
+        <button class="btn-action" onclick="openStep4()">Aage Badhein</button>
+        <button class="btn-close" onclick="closeAllModals()">Close</button>
+    </div>
+</div>
+
+<!-- STEP 4 MODAL: TIMER & SUCCESS -->
+<div class="modal-overlay" id="modalStep4">
+    <div class="modal-content">
+        <h3>Payment Verification</h3>
+        <p style="font-size:13px; color:#555;">Kripya 2 minute prateeksha karein, aapka payment verify ho raha hai...</p>
+        
+        <!-- TIMER DISPLAY -->
+        <div class="timer-display" id="timerBox">02:00</div>
+        
+        <!-- SUCCESS MSG ACTION -->
+        <div id="successBox" class="success-msg" style="display:none;">🎉 SUCCESS!</div>
+        <button class="btn-close" id="timerCloseBtn" onclick="closeAllModals()" style="display:none;">Close</button>
+    </div>
+</div>
+
+
+<!-- LEFT SIDE: SOCIAL BUTTONS -->
+<div class="social-sticky">
+    <a href="https://wa.me/918103982813?text=Hello%20Master%20VIP" target="_blank" class="btn-social btn-whatsapp" title="WhatsApp">WA</a>
+    <a href="https://t.me/YourUsername" target="_blank" class="btn-social btn-telegram" title="Telegram">TG</a>
+</div>
+
+<!-- RIGHT SIDE: SCROLL BUTTONS -->
+<div class="scroll-sticky">
+    <button onclick="scrollToTop()" class="btn-scroll" title="Go to Top">▲</button>
+    <button onclick="scrollToBottom()" class="btn-scroll" title="Go to Bottom">▼</button>
 </div>
 
 <script>
@@ -110,6 +230,73 @@
         }
         document.getElementById('chartGrid').innerHTML = html;
     });
+
+    // SCROLL FUNCTIONS
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    function scrollToBottom() { window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); }
+
+    // MODAL CONTROL FUNCTIONS
+    function closeAllModals() {
+        document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
+    }
+
+    function openStep1() {
+        document.getElementById('modalStep1').style.display = 'flex';
+    }
+
+    function openStep2() {
+        let name = document.getElementById('userName').value.trim();
+        let phone = document.getElementById('userPhone').value.trim();
+        if(name == "" || phone == "") {
+            alert("Kripya Naam aur Mobile Number sahi se bharein!");
+            return;
+        }
+        closeAllModals();
+        document.getElementById('modalStep2').style.display = 'flex';
+    }
+
+    function openStep3(price, duration) {
+        closeAllModals();
+        document.getElementById('planHeading').innerText = `Pay ₹${price} (${duration})`;
+        document.getElementById('modalStep3').style.display = 'flex';
+    }
+
+    function openStep4() {
+        let utr = document.getElementById('utrInput').value.trim();
+        if(utr == "") {
+            alert("Kripya valid UTR ya Transaction ID dalein!");
+            return;
+        }
+        closeAllModals();
+        document.getElementById('modalStep4').style.display = 'flex';
+        
+        document.getElementById('timerBox').style.display = 'block';
+        document.getElementById('successBox').style.display = 'none';
+        document.getElementById('timerCloseBtn').style.display = 'none';
+        
+        startTimer(120);
+    }
+
+    // TIMER LOGIC
+    function startTimer(duration) {
+        let timer = duration, minutes, seconds;
+        let interval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            document.getElementById('timerBox').innerText = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                clearInterval(interval);
+                document.getElementById('timerBox').style.display = 'none';
+                document.getElementById('successBox').style.display = 'block';
+                document.getElementById('timerCloseBtn').style.display = 'inline-block';
+            }
+        }, 1000);
+    }
 </script>
 </body>
 </html>
