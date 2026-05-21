@@ -2,7 +2,7 @@
 <html lang="hi">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASTER VIP CHART</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -13,36 +13,18 @@
         .header { background: var(--dark-blue); padding: 10px; border-bottom: 3px solid var(--gold); }
         .header h1 { margin: 0; font-size: 20px; color: var(--gold); text-transform: uppercase; }
 
-        .desc { background: #fff; width: 90%; margin: 15px auto; padding: 10px; border-left: 5px solid var(--vip-red); text-align: left; }
-        .desc ul { padding-left: 20px; font-size: 14px; margin: 0; }
-
-        .master-box { background: #000; margin: 15px auto; width: 90%; padding: 15px; border: 2px solid var(--gold); border-radius: 10px; }
-        .master-val { color: #fff; font-size: 30px; font-weight: 900; }
-
-        .market-row { background: #fff; border: 1px solid #ddd; margin: 5px auto; width: 90%; padding: 10px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; }
-        .m-name { font-weight: bold; color: #333; }
-        .m-res { font-weight: 900; font-size: 20px; color: var(--vip-red); }
-
-        .chart-container { width: 90%; margin: 10px auto; background: #fff; border: 1px solid #000; overflow-x: auto; }
-        .vip-table { border-collapse: collapse; width: 100%; table-layout: fixed; }
-        .vip-table th { background: #ffff00; color: #000; font-size: 11px; padding: 8px 0; border: 1px solid #000; }
-        .vip-table td { border: 1px solid #000; height: 60px; background: #fff; vertical-align: middle; text-align: center; padding: 0; }
+        .box { background: #fff; width: 90%; margin: 15px auto; padding: 15px; border-radius: 10px; display: none; }
+        .desc { display: block; text-align: left; border-left: 5px solid var(--vip-red); }
         
-        /* DATE CELL WIDER */
-        .date-box { background: #f0f0f0 !important; font-size: 10px; font-weight: bold; width: 90px !important; min-width: 90px !important; line-height: 1.2; word-wrap: break-word; }
+        .lock-btn { font-size: 40px; cursor: pointer; margin: 20px; }
+        .input-field { width: 80%; padding: 10px; margin: 5px; border: 1px solid #ccc; border-radius: 5px; }
+        .btn { padding: 12px 25px; background: var(--dark-blue); color: #fff; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
         
-        .cell-content { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; gap: 2px; }
-        .p-v { display: flex; flex-direction: column; font-size: 9px; line-height: 1; width: 12px; font-weight: bold; }
-        .j-d { font-size: 19px; font-weight: 900; color: #000; }
-        .red-house .j-d, .red-house .p-v { color: var(--vip-red) !important; }
-
-        .nav-bar { position: fixed; bottom: 50px; width: 100%; display: flex; }
-        .nav-btn { flex: 1; padding: 10px; background: #333; color: #FFD700; text-decoration: none; font-weight: bold; border: 1px solid #FFD700; }
-
+        #timer { font-size: 24px; color: var(--vip-red); font-weight: bold; }
+        
         .contact-bar { position: fixed; bottom: 0; width: 100%; display: flex; }
-        .btn { flex: 1; padding: 12px; color: #fff; text-decoration: none; font-weight: bold; font-size: 14px; }
-        .wa { background: #25d366; }
-        .tg { background: #0088cc; }
+        .c-btn { flex: 1; padding: 12px; color: #fff; text-decoration: none; font-weight: bold; font-size: 14px; }
+        .wa { background: #25d366; } .tg { background: #0088cc; }
     </style>
 </head>
 <body>
@@ -51,86 +33,80 @@
 
 <div class="header"><h1>MASTER VIP CHART</h1></div>
 
-<div class="desc">
+<!-- 1. Start Page -->
+<div id="startSection" class="box desc" style="display:block;">
     <ul>
         <li>सबसे तेज़ और सटीक रिजल्ट यहाँ उपलब्ध हैं।</li>
         <li>एक्सपर्ट्स द्वारा तैयार किया गया VIP गेम।</li>
         <li>100% भरोसेमंद और सुरक्षित सर्विस।</li>
         <li>आज ही जुड़ें और जीत की शुरुआत करें।</li>
     </ul>
+    <div class="lock-btn" onclick="showForm()">🔒</div>
+    <p>Click Lock to Subscribe & View Chart</p>
 </div>
 
-<div class="master-box">
-    <div style="color:var(--gold); font-size:12px;">MASTER VIP CHART RESULT</div>
-    <div class="master-val" id="vipVal">---</div>
+<!-- 2. Form -->
+<div id="formSection" class="box">
+    <h3>Enter Details</h3>
+    <input type="text" id="name" placeholder="Name" class="input-field"><br>
+    <input type="text" id="phone" placeholder="Phone Number" class="input-field"><br>
+    <button class="btn" onclick="showSubscription()">Next</button>
 </div>
 
-<div id="liveMarketContainer"></div>
-
-<div class="chart-container">
-    <table class="vip-table">
-        <thead>
-            <tr>
-                <th style="width:90px;">DATE</th>
-                <th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th>
-            </tr>
-        </thead>
-        <tbody id="gridData"></tbody>
-    </table>
+<!-- 3. Subscriptions -->
+<div id="subSection" class="box">
+    <h3>Select Plan</h3>
+    <div onclick="showScanner()">1 Day - ₹599</div><br>
+    <div onclick="showScanner()">7 Days - ₹1499</div>
 </div>
 
-<div class="nav-bar">
-    <a href="#" class="nav-btn">TOP ⬆️</a>
-    <a href="#bottom" class="nav-btn">BOTTOM ⬇️</a>
+<!-- 4. Scanner -->
+<div id="scanSection" class="box">
+    <h3>Scan QR to Pay (Omkar Yadav)</h3>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=omkaryadav@upi" alt="QR">
+    <br><br>
+    <input type="text" id="utr" placeholder="Enter UTR Number" class="input-field"><br>
+    <button class="btn" onclick="startTimer()">Submit UTR</button>
+</div>
+
+<!-- 5. Timer -->
+<div id="timerSection" class="box">
+    <div id="timer">02:00</div>
+    <p>Verifying Payment... Please Wait</p>
+</div>
+
+<!-- 6. Success -->
+<div id="successSection" class="box">
+    <h2 style="color:green;">✅ Success! Access Granted.</h2>
+    <button class="btn" onclick="location.reload()">View Chart</button>
 </div>
 
 <div class="contact-bar">
-    <a href="https://wa.me/918103982813" class="btn wa">WhatsApp</a>
-    <a href="https://t.me/+918103982813" class="btn tg">Telegram</a>
+    <a href="https://wa.me/918103982813" class="c-btn wa">WhatsApp</a>
+    <a href="https://t.me/+918103982813" class="c-btn tg">Telegram</a>
 </div>
 
-<div id="bottom"></div>
-
 <script>
-    const v = Math.random();
-    const LIVE_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Live&v=" + v;
-    const CHART_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart&v=" + v;
-
-    fetch(LIVE_URL).then(r => r.text()).then(data => {
-        let rows = data.split('\n');
-        let html = '';
-        rows.forEach(row => {
-            let cols = row.split(',');
-            if(cols.length < 2) return;
-            let name = cols[0].replace(/"/g, '').trim();
-            let res = cols[1].replace(/"/g, '').trim();
-            if(name.toUpperCase().includes("MASTER VIP")) document.getElementById('vipVal').innerText = res;
-            else html += `<div class="market-row"><span class="m-name">${name}</span><span class="m-res">${res}</span></div>`;
-        });
-        document.getElementById('liveMarketContainer').innerHTML = html;
-    });
-
-    fetch(CHART_URL).then(r => r.text()).then(data => {
-        const rows = data.split('\n').filter(r => r.trim() !== '').map(r => r.split(','));
-        let html = '';
-        for(let i=1; i<rows.length; i++) {
-            let d = (rows[i][0] || "").trim().replace(/"/g, '');
-            html += `<tr><td class="date-box">${d}</td>`;
-            for(let j=1; j<=16; j+=3) {
-                let lp=(rows[i][j]||"").trim().replace(/"/g, ''), jd=(rows[i][j+1]||"").trim().replace(/"/g, ''), rp=(rows[i][j+2]||"").trim().replace(/"/g, '');
-                let isRed = (jd.length==2 && (jd[0]==jd[1] || Math.abs(jd[0]-jd[1])==5));
-                html += `<td class="${isRed?'red-house':''}">
-                    <div class="cell-content">
-                        <div class="p-v">${lp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
-                        <div class="j-d">${jd}</div>
-                        <div class="p-v">${rp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
-                    </div>
-                </td>`;
+    function showForm() { document.getElementById('startSection').style.display='none'; document.getElementById('formSection').style.display='block'; }
+    function showSubscription() { document.getElementById('formSection').style.display='none'; document.getElementById('subSection').style.display='block'; }
+    function showScanner() { document.getElementById('subSection').style.display='none'; document.getElementById('scanSection').style.display='block'; }
+    
+    function startTimer() {
+        document.getElementById('scanSection').style.display='none';
+        document.getElementById('timerSection').style.display='block';
+        let time = 120;
+        let x = setInterval(() => {
+            time--;
+            let min = Math.floor(time/60);
+            let sec = time % 60;
+            document.getElementById('timer').innerText = "0" + min + ":" + (sec < 10 ? "0"+sec : sec);
+            if(time <= 0) {
+                clearInterval(x);
+                document.getElementById('timerSection').style.display='none';
+                document.getElementById('successSection').style.display='block';
             }
-            html += `</tr>`;
-        }
-        document.getElementById('gridData').innerHTML = html;
-    });
+        }, 1000);
+    }
 </script>
 </body>
 </html>
