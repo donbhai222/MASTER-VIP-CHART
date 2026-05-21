@@ -10,8 +10,12 @@
         .box { background: #fff; width: 90%; margin: 20px auto; padding: 20px; border-radius: 10px; display: none; border-left: 5px solid red; }
         .btn { padding: 12px 25px; background: #1a024d; color: #FFD700; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; }
         .input-field { width: 80%; padding: 10px; margin: 5px; border: 1px solid #ccc; border-radius: 5px; }
-        .chart-table { width: 90%; margin: 20px auto; background: #fff; border-collapse: collapse; display: none; }
-        .chart-table td { border: 1px solid #000; height: 50px; text-align: center; font-weight: bold; }
+        
+        /* Chart & Result Styles */
+        .chart-container { width: 90%; margin: 20px auto; background: #fff; border: 1px solid #000; overflow-x: auto; display: none; }
+        .vip-table { border-collapse: collapse; width: 100%; }
+        .vip-table td { border: 1px solid #000; height: 50px; text-align: center; font-weight: bold; }
+        
         .contact-bar { position: fixed; bottom: 0; width: 100%; display: flex; }
         .c-btn { flex: 1; padding: 12px; color: #fff; text-decoration: none; font-weight: bold; }
     </style>
@@ -20,35 +24,22 @@
 
 <div class="marquee"><marquee>🚀 MASTER VIP CHART - SABSE SATIK RESULT!</marquee></div>
 
+<!-- Step 1 -->
 <div id="step1" style="display:block; background:#fff; width:90%; margin:20px auto; padding:20px; border-left:5px solid red; text-align:left;">
     <ul><li>Sabse tez result.</li><li>Experts dwara taiyar.</li><li>100% bharosemand.</li><li>Aaj hi judein.</li></ul>
     <div style="font-size:50px; cursor:pointer; text-align:center;" onclick="go(2)">🔒</div>
 </div>
 
-<div id="step2" class="box">
-    <input type="text" id="name" placeholder="Name" class="input-field"><br>
-    <input type="text" id="phone" placeholder="Phone" class="input-field"><br>
-    <button class="btn" onclick="go(3)">Next</button>
-</div>
+<!-- Step 2-5 -->
+<div id="step2" class="box"><input type="text" id="name" placeholder="Name" class="input-field"><br><input type="text" id="phone" placeholder="Phone" class="input-field"><br><button class="btn" onclick="go(3)">Next</button></div>
+<div id="step3" class="box"><h3>Select Plan</h3><button class="btn" onclick="go(4)">1 Day - ₹599</button><br><button class="btn" onclick="go(4)">7 Days - ₹1499</button></div>
+<div id="step4" class="box"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=omkaryadav@upi" alt="QR"><br><input type="text" id="utr" placeholder="Enter UTR" class="input-field"><br><button class="btn" onclick="startTimer()">Submit</button></div>
+<div id="step5" class="box"><h2 id="timer">02:00</h2><p>Verifying Payment...</p></div>
 
-<div id="step3" class="box">
-    <h3>Select Plan</h3>
-    <button class="btn" onclick="go(4)">1 Day - ₹599</button><br>
-    <button class="btn" onclick="go(4)">7 Days - ₹1499</button>
+<!-- Chart -->
+<div id="chartContainer" class="chart-container">
+    <table id="chartGrid" class="vip-table"></table>
 </div>
-
-<div id="step4" class="box">
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=omkaryadav@upi" alt="QR">
-    <br><input type="text" id="utr" placeholder="Enter UTR" class="input-field"><br>
-    <button class="btn" onclick="startTimer()">Submit</button>
-</div>
-
-<div id="step5" class="box">
-    <h2 id="timer">02:00</h2>
-    <p>Verifying Payment...</p>
-</div>
-
-<table id="chartGrid" class="chart-table"></table>
 
 <div class="contact-bar">
     <a href="https://wa.me/918103982813" class="c-btn" style="background:#25d366;">WhatsApp</a>
@@ -70,12 +61,13 @@
             if(t<=0) {
                 clearInterval(x);
                 document.getElementById('step5').style.display = 'none';
-                document.getElementById('chartGrid').style.display = 'table';
+                document.getElementById('chartContainer').style.display = 'block';
                 loadData();
             }
         }, 1000);
     }
     function loadData() {
+        // Yeh line aapka chart ka data load karegi
         fetch("https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart&v=" + Math.random())
         .then(r=>r.text()).then(d => {
             document.getElementById('chartGrid').innerHTML = d.split('\n').map(r => `<tr>${r.split(',').map(c=>`<td>${c.replace(/"/g,'')}</td>`).join('')}</tr>`).join('');
