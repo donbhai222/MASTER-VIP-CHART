@@ -2,24 +2,39 @@
 <html lang="hi">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>MASTER VIP CHART</title>
     <style>
-        body { background: #FFBF82; font-family: sans-serif; text-align: center; margin: 0; padding-bottom: 50px; }
-        .header { background: #1a024d; padding: 15px; color: #FFD700; font-weight: bold; }
+        :root { --dark-blue: #1a024d; --gold: #FFD700; --vip-red: #e31e24; }
+        body { background: #FFBF82; font-family: 'Arial Narrow', sans-serif; text-align: center; margin: 0; padding-bottom: 50px; }
         
-        .desc { background: #fff; width: 90%; margin: 15px auto; padding: 10px; border-left: 5px solid #e31e24; text-align: left; }
+        .header { background: var(--dark-blue); padding: 10px; border-bottom: 3px solid var(--gold); }
+        .header h1 { margin: 0; font-size: 18px; color: var(--gold); text-transform: uppercase; }
+
+        .desc { background: #fff; width: 90%; margin: 15px auto; padding: 10px; border-left: 5px solid var(--vip-red); text-align: left; }
         .desc ul { padding-left: 20px; font-size: 14px; margin: 0; }
 
-        .vip-box { background: #000; width: 90%; margin: 15px auto; padding: 15px; border: 2px solid #FFD700; border-radius: 10px; color: #fff; }
-        
+        .master-vip-box { background: #000; margin: 15px auto; width: 90%; padding: 10px; border: 2px solid var(--gold); border-radius: 10px; box-shadow: 0 0 10px var(--gold); }
+        .vip-title { color: var(--gold); font-size: 12px; font-weight: bold; }
+        .vip-result { color: #fff; font-size: 28px; font-weight: 900; }
+
+        /* Market List (Name Top, Result Bottom, Center) */
         .row { background: #fff; border: 1px solid #ddd; margin: 5px auto; width: 90%; padding: 10px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; }
         .name { font-weight: 900; font-size: 16px; color: #333; margin-bottom: 5px; }
-        .res { font-weight: 900; font-size: 20px; color: #e31e24; }
+        .res { font-weight: 900; font-size: 20px; color: var(--vip-red); }
 
-        #chartWrapper { width: 90%; margin: 15px auto; background: #fff; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; }
-        td { border: 1px solid #000; height: 35px; text-align: center; font-size: 12px; font-weight: bold; }
+        /* Original Chart Layout */
+        #chartWrapper { width: 90%; margin: 10px auto; background: #fff; border: 1px solid #000; overflow-x: auto; }
+        table { border-collapse: collapse; width: 100%; min-width: 300px; table-layout: fixed; }
+        th { background: #ffff00; color: #000; font-size: 10px; padding: 6px 0; border: 1px solid #000; }
+        td { border: 1px solid #000; height: 50px; background: #fff; vertical-align: middle; text-align: center; padding: 0; }
+        
+        .date-box { background: #f0f0f0 !important; font-size: 9px; font-weight: bold; width: 45px !important; }
+        .cell-content { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+        .panna-vertical { display: flex; flex-direction: column; font-size: 8px; line-height: 0.9; width: 10px; font-weight: bold; }
+        .jodi { font-size: 16px; font-weight: 900; color: #000; margin: 0 4px; }
+        .red-house .jodi, .red-house .panna-vertical { color: var(--vip-red) !important; }
+        .lock-btn { color: var(--vip-red); font-size: 18px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -35,24 +50,32 @@
     </ul>
 </div>
 
-<div class="vip-box">
-    <div>MASTER VIP CHART RESULT</div>
-    <div id="vipResult" style="font-size: 30px; font-weight: 900;">Loading...</div>
+<div class="master-vip-box">
+    <div class="vip-title">MASTER VIP CHART RESULT</div>
+    <div class="vip-result" id="vipResultVal">---</div>
 </div>
 
 <div id="liveContainer"></div>
 
 <div id="chartWrapper">
-    <table id="chartTable"><tr><td>Loading Chart...</td></tr></table>
+    <table>
+        <thead>
+            <tr>
+                <th style="width:45px;">DATE</th>
+                <th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th>
+            </tr>
+        </thead>
+        <tbody id="gridData"></tbody>
+    </table>
 </div>
 
 <script>
-    const LIVE_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Live";
-    const CHART_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart";
+    const LIVE_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Live&v=" + Math.random();
+    const CHART_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart&v=" + Math.random();
 
-    // Live Results
+    // Load Live Data
     fetch(LIVE_URL).then(r => r.text()).then(data => {
-        let rows = data.split('\n');
+        const rows = data.split('\n');
         let html = '';
         rows.forEach(row => {
             let cols = row.split(',');
@@ -60,7 +83,7 @@
             let name = cols[0].replace(/"/g, '').trim();
             let res = cols[1].replace(/"/g, '').trim();
             if(name.toUpperCase().includes("MASTER VIP")) {
-                document.getElementById('vipResult').innerText = res;
+                document.getElementById('vipResultVal').innerText = res;
             } else {
                 html += `<div class="row"><span class="name">${name}</span><span class="res">${res}</span></div>`;
             }
@@ -68,17 +91,33 @@
         document.getElementById('liveContainer').innerHTML = html;
     });
 
-    // Chart
+    // Load Chart Data
     fetch(CHART_URL).then(r => r.text()).then(data => {
-        let rows = data.split('\n');
-        let html = '';
-        rows.forEach(row => {
-            let cols = row.split(',');
-            html += '<tr>' + cols.map(c => `<td>${c.replace(/"/g, '')}</td>`).join('') + '</tr>';
-        });
-        document.getElementById('chartTable').innerHTML = html;
+        const rows = data.split('\n').filter(r => r.trim() !== '').map(r => r.split(','));
+        let html = '', lockShown = false;
+        for(let i=1; i<rows.length; i++) {
+            let d = (rows[i][0] || "").trim().replace(/"/g, ''); if(!d) continue;
+            html += `<tr><td class="date-box">${d}</td>`;
+            for(let j=1; j<=16; j+=3) {
+                let lp=(rows[i][j]||"").trim().replace(/"/g, ''), jd=(rows[i][j+1]||"").trim().replace(/"/g, ''), rp=(rows[i][j+2]||"").trim().replace(/"/g, '');
+                if(!jd && !lp) {
+                    if(!lockShown) { html += `<td onclick="alert('VIP लॉक')"><span class="lock-btn">🔒</span></td>`; lockShown = true; }
+                    else html += `<td></td>`;
+                } else {
+                    let isRed = (jd.length==2 && (jd[0]==jd[1] || Math.abs(jd[0]-jd[1])==5));
+                    html += `<td class="${isRed?'red-house':''}">
+                        <div class="cell-content">
+                            <div class="panna-vertical">${lp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
+                            <div class="jodi">${jd}</div>
+                            <div class="panna-vertical">${rp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
+                        </div>
+                    </td>`;
+                }
+            }
+            html += `</tr>`;
+        }
+        document.getElementById('gridData').innerHTML = html;
     });
 </script>
-
 </body>
 </html>
