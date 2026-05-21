@@ -6,12 +6,12 @@
     <title>MASTER VIP CHART</title>
     <style>
         body { background: #FFBF82; font-family: sans-serif; text-align: center; margin: 0; padding-bottom: 120px; }
-        .marquee { background: #000; color: #FFD700; padding: 12px; font-weight: bold; border-bottom: 3px solid #e31e24; font-size: 16px; }
+        .marquee { background: #000; color: #FFD700; padding: 10px; font-weight: bold; border-bottom: 2px solid #e31e24; }
         
-        /* 10 Market Chart Style */
-        .chart-container { width: 95%; margin: 20px auto; background: #fff; padding: 10px; border-radius: 10px; overflow-x: auto; }
-        .vip-table { border-collapse: collapse; width: 100%; }
-        .vip-table td { border: 1px solid #000; height: 50px; background: #fff; text-align: center; font-weight: bold; font-size: 12px; }
+        /* 10 Market Chart Layout */
+        .chart-section { width: 95%; margin: 15px auto; background: #fff; padding: 5px; border-radius: 10px; overflow-x: auto; }
+        .vip-table { border-collapse: collapse; width: 100%; font-size: 11px; }
+        .vip-table td { border: 1px solid #000; height: 40px; text-align: center; font-weight: bold; }
         
         /* Payment Section */
         .pay-section { background: #fff; width: 90%; margin: 20px auto; padding: 20px; border-radius: 10px; border: 2px solid #1a024d; }
@@ -25,25 +25,23 @@
 </head>
 <body>
 
-<div class="marquee"><marquee>🔥 MASTER VIP CHART - यहाँ पाएं 10 मार्केट्स के सबसे सटीक रिजल्ट! आज ही जुड़ें। 🔥</marquee></div>
+<div class="marquee"><marquee>🔥 MASTER VIP CHART - 10 मार्केट्स के सबसे सटीक रिजल्ट यहाँ पाएं! 🔥</marquee></div>
 
-<!-- 1. Chart Section (Sabse Upar) -->
-<div class="chart-container">
-    <h2 style="color: #1a024d; margin-top:0;">📊 10 मार्केट्स लाइव चार्ट</h2>
+<!-- 1. Chart Section (Google Sheet se control hoga) -->
+<div class="chart-section">
     <table class="vip-table" id="chartGrid"></table>
 </div>
 
-<!-- 2. Payment Section (Neeche) -->
+<!-- 2. Payment Section -->
 <div class="pay-section">
     <div id="step1" style="text-align: left;">
-        <h3 style="color: #e31e24;">✨ प्रीमियम VIP एक्सेस:</h3>
-        <ul style="line-height: 1.6;">
-            <li>✅ 10 मार्केट्स के तेज़ रिजल्ट्स।</li>
-            <li>✅ एक्सपर्ट्स की सॉलिड गेम ट्रिक।</li>
-            <li>✅ सुरक्षित और फास्ट सर्विस।</li>
+        <h3 style="color: #e31e24;">✨ VIP मेंबरशिप प्राप्त करें:</h3>
+        <ul style="line-height: 1.5;">
+            <li>✅ 10 मार्केट्स का लाइव चार्ट।</li>
+            <li>✅ सबसे तेज़ रिजल्ट अपडेट।</li>
+            <li>✅ सुरक्षित पेमेंट सुविधा।</li>
         </ul>
-        <p style="text-align:center;">लॉक खोलें और पेमेंट करके चार्ट एक्सेस करें:</p>
-        <div style="font-size:50px; cursor:pointer; text-align:center;" onclick="go(2)">🔒</div>
+        <div style="font-size:40px; cursor:pointer; text-align:center;" onclick="go(2)">🔒</div>
     </div>
     
     <div id="step2" class="box">
@@ -54,13 +52,13 @@
     </div>
 
     <div id="step3" class="box">
-        <h3>सब्सक्रिप्शन प्लान</h3>
+        <h3>प्लान चुनें</h3>
         <button class="btn" onclick="go(4)">1 दिन - ₹599</button><br><br>
         <button class="btn" onclick="go(4)">7 दिन - ₹1499</button>
     </div>
 
     <div id="step4" class="box">
-        <h3>पेमेंट (Omkar Yadav)</h3>
+        <h3>QR स्कैन करें (Omkar Yadav)</h3>
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=omkaryadav@upi" alt="QR">
         <br><input type="text" id="utr" placeholder="UTR नंबर यहाँ लिखें" class="input-field"><br>
         <button class="btn" onclick="startTimer()">सबमिट करें</button>
@@ -78,12 +76,15 @@
 </div>
 
 <script>
+    // Page load hote hi chart load hoga
     window.onload = loadData;
+
     function go(n) {
         document.getElementById('step1').style.display = 'none';
         for(let i=2; i<=5; i++) document.getElementById('step'+i).style.display = 'none';
         document.getElementById('step'+n).style.display = 'block';
     }
+
     function startTimer() {
         go(5);
         let t = 120;
@@ -93,10 +94,26 @@
             if(t<=0) { clearInterval(x); document.getElementById('step5').innerHTML = "<h3>✅ पेमेंट सफल! धन्यवाद।</h3>"; }
         }, 1000);
     }
+
     function loadData() {
-        fetch("https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart&v=" + Math.random())
-        .then(r=>r.text()).then(d => {
-            document.getElementById('chartGrid').innerHTML = d.split('\n').map(r => `<tr>${r.split(',').map(c=>`<td>${c.replace(/"/g,'')}</td>`).join('')}</tr>`).join('');
+        // Aapki Google Sheet URL
+        const SHEET_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart&v=" + Math.random();
+        fetch(SHEET_URL)
+        .then(r => r.text())
+        .then(d => {
+            let rows = d.split('\n');
+            let tableHTML = "";
+            rows.forEach(r => {
+                if(r.trim() !== "") {
+                    tableHTML += "<tr>";
+                    let cols = r.split(',');
+                    cols.forEach(c => {
+                        tableHTML += "<td>" + c.replace(/"/g, '') + "</td>";
+                    });
+                    tableHTML += "</tr>";
+                }
+            });
+            document.getElementById('chartGrid').innerHTML = tableHTML;
         });
     }
 </script>
