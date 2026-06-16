@@ -6,41 +6,46 @@
     <title>MASTER VIP CHART</title>
     <style>
         :root { --dark-blue: #1a024d; --gold: #FFD700; --vip-red: #e31e24; }
-        body { background: #FFBF82; font-family: sans-serif; text-align: center; margin: 0; padding-bottom: 80px; }
-        .header { background: var(--dark-blue); padding: 15px; border-bottom: 3px solid var(--gold); }
-        .header h1 { margin: 0; font-size: 20px; color: var(--gold); }
-        .ticker-wrap { background: #000; color: #fff; padding: 8px; border-bottom: 2px solid var(--gold); }
-        .master-box { background: #000; margin: 15px auto; width: 90%; padding: 15px; border: 2px solid var(--gold); border-radius: 10px; color: #fff; }
-        .chart-wrapper { width: 92%; margin: 15px auto; background: #fff; padding: 5px; border: 1px solid #000; overflow-x: auto; }
+        body { background: #FFBF82; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding-bottom: 80px; }
+        
+        .header { background: var(--dark-blue); padding: 15px; border-bottom: 4px solid var(--gold); }
+        .header h1 { margin: 0; font-size: 22px; color: var(--gold); text-transform: uppercase; }
+
+        .chart-wrapper { width: 92%; margin: 20px auto; }
+        .chart-container { background: #fff; border: 3px solid var(--dark-blue); border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        
         .vip-table { border-collapse: collapse; width: 100%; min-width: 320px; }
-        .vip-table th { background: #ffff00; font-size: 11px; padding: 8px; border: 1px solid #000; }
-        .vip-table td { border: 1px solid #000; height: 45px; text-align: center; font-size: 14px; font-weight: bold; }
-        .btn-unlock-trigger { background: var(--vip-red); color: white; padding: 15px 30px; border-radius: 30px; cursor: pointer; margin: 20px auto; border: 2px solid var(--gold); }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 2000; }
-        .modal-content { background: white; padding: 20px; border-radius: 15px; width: 85%; max-width: 320px; }
-        .btn-action { background: var(--dark-blue); color: var(--gold); padding: 12px; border: none; width: 100%; margin-top: 10px; cursor: pointer; font-weight: bold; }
-        .scroll-sticky { position: fixed; bottom: 20px; right: 15px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
-        .btn-scroll { width: 70px; height: 40px; border-radius: 8px; background: var(--dark-blue); color: var(--gold); border: 1px solid #000; font-size: 10px; cursor: pointer; }
+        .vip-table th { background: var(--dark-blue); color: var(--gold); font-size: 11px; padding: 12px 5px; text-transform: uppercase; }
+        .vip-table td { border-bottom: 1px solid #ddd; height: 50px; text-align: center; font-size: 14px; font-weight: bold; color: #333; }
+        .vip-table tbody tr:nth-child(even) { background-color: #fff9f0; }
+
+        .btn-unlock-trigger { background: var(--vip-red); color: white; font-size: 18px; font-weight: bold; border: 2px solid var(--gold); padding: 15px 40px; border-radius: 50px; cursor: pointer; margin: 20px auto; display: block; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+        /* MODAL STYLES */
+        .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:none; justify-content:center; align-items:center; z-index:2000; }
+        .modal-content { background:white; padding:20px; border-radius:15px; width:85%; max-width:320px; text-align:center; }
+        .btn-action { background:var(--dark-blue); color:var(--gold); padding:12px; border:none; width:100%; margin-top:10px; cursor:pointer; font-weight:bold; border-radius:5px; }
+        
+        /* SCROLL BUTTONS */
+        .scroll-sticky { position:fixed; bottom:20px; right:15px; display:flex; flex-direction:column; gap:10px; }
+        .btn-scroll { width:70px; height:40px; background:var(--dark-blue); color:var(--gold); border:2px solid var(--gold); font-size:10px; cursor:pointer; border-radius:8px; }
     </style>
 </head>
 <body>
 
 <div class="header"><h1>MASTER VIP CHART</h1></div>
-<div class="ticker-wrap"><marquee>आज का लीक गेम तैयार है! 💥 100% फिक्स जोड़ी। 💥</marquee></div>
-
-<div class="master-box">
-    <div>RESULT</div>
-    <div style="font-size: 28px; font-weight: 900;" id="vipVal">---</div>
-</div>
 
 <div class="chart-wrapper">
-    <table class="vip-table">
-        <thead><tr><th>DATE</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr></thead>
-        <tbody id="chartGrid"><tr><td colspan="7">Loading Chart...</td></tr></tbody>
-    </table>
+    <div class="chart-container">
+        <table class="vip-table">
+            <thead><tr><th>DATE</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th></tr></thead>
+            <tbody id="chartGrid"></tbody>
+        </table>
+    </div>
 </div>
 
-<button class="btn-unlock-trigger" onclick="openModal()">🔓 REMOVE LOCK</button>
+<button class="btn-unlock-trigger" onclick="document.getElementById('mainModal').style.display='flex'">🔓 REMOVE LOCK</button>
 
 <div class="scroll-sticky">
     <button onclick="window.scrollTo(0,0)" class="btn-scroll">▲ TOP</button>
@@ -51,40 +56,36 @@
     <div class="modal-content" id="step1">
         <h3>Details</h3>
         <input type="text" id="userName" placeholder="Apna Naam" style="width:90%; padding:10px;">
-        <input type="number" id="userPhone" placeholder="Mobile Number" style="width:90%; padding:10px; margin-top:10px;">
-        <button class="btn-action" onclick="showScanner()">Pay ₹999</button>
+        <input type="number" id="userPhone" placeholder="Mobile Number" style="width:90%; padding:10px; margin:10px 0;">
+        <button class="btn-action" onclick="document.getElementById('step1').style.display='none'; document.getElementById('step2').style.display='block';">Pay ₹999</button>
     </div>
     <div class="modal-content" id="step2" style="display:none;">
-        <h3>Scan & Pay ₹999</h3>
+        <h3>Pay ₹999</h3>
         <img src="paytm-qr.png.jpeg" alt="QR" style="width:150px; height:150px; border:2px dashed #000;">
-        <input type="text" id="utr" placeholder="12-Digit UTR Number" style="width:90%; padding:10px; margin-top:10px;">
-        <button class="btn-action" onclick="startVerification()">Verify Payment</button>
+        <input type="text" id="utr" placeholder="12-Digit UTR" style="width:90%; padding:10px; margin:10px 0;">
+        <button class="btn-action" onclick="verify()">Verify Payment</button>
     </div>
     <div class="modal-content" id="step3" style="display:none;">
-        <h3>Verifying...</h3>
+        <h3>Verification</h3>
         <div id="timer" style="font-size:30px; font-weight:bold; color:red;">02:00</div>
         <div id="success" style="display:none; color:green; font-weight:bold;">🎉 SUCCESS!</div>
     </div>
 </div>
 
 <script>
-    // Chart Loading
-    const CHART_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart";
-    fetch(CHART_URL).then(r=>r.text()).then(data => {
+    const URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart";
+    fetch(URL).then(r=>r.text()).then(data => {
         const rows = data.split('\n');
         let html = '';
         for(let i=1; i<rows.length; i++) {
             let cols = rows[i].split(',');
             if(cols.length < 2) continue;
-            html += `<tr><td>${cols[0].replace(/"/g,'')}</td><td>${cols[1]||''}</td><td>${cols[2]||''}</td><td>${cols[3]||''}</td><td>${cols[4]||''}</td><td>${cols[5]||''}</td><td>${cols[6]||''}</td></tr>`;
+            html += '<tr>' + cols.slice(0,7).map(c => `<td>${c.replace(/"/g,'')}</td>`).join('') + '</tr>';
         }
         document.getElementById('chartGrid').innerHTML = html;
     });
 
-    // Modal Logic
-    function openModal() { document.getElementById('mainModal').style.display = 'flex'; }
-    function showScanner() { if(document.getElementById('userName').value) { document.getElementById('step1').style.display = 'none'; document.getElementById('step2').style.display = 'block'; } }
-    function startVerification() {
+    function verify() {
         document.getElementById('step2').style.display = 'none';
         document.getElementById('step3').style.display = 'block';
         let t = 120;
