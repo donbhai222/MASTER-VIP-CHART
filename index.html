@@ -2,75 +2,30 @@
 <html lang="hi">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>MASTER VIP CHART</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REAL MATKA CHART</title>
     <style>
-        :root { --dark-blue: #1a024d; --gold: #FFD700; --vip-red: #e31e24; }
-        body { background: #FFBF82; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding-bottom: 80px; }
-        
-        .header { background: var(--dark-blue); padding: 15px; border-bottom: 4px solid var(--gold); }
-        .header h1 { margin: 0; font-size: 22px; color: var(--gold); text-transform: uppercase; }
-
-        .chart-wrapper { width: 95%; margin: 20px auto; }
-        .chart-container { background: #fff; border: 3px solid var(--dark-blue); border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        
-        .vip-table { border-collapse: collapse; width: 100%; min-width: 320px; }
-        .vip-table th { background: var(--dark-blue); color: var(--gold); font-size: 11px; padding: 12px 2px; text-transform: uppercase; }
-        .vip-table td { border-bottom: 1px solid #ddd; height: 55px; text-align: center; color: #333; }
-        .vip-table tbody tr:nth-child(even) { background-color: #fff9f0; }
-
-        .btn-unlock-trigger { background: var(--vip-red); color: white; font-size: 18px; font-weight: bold; border: 2px solid var(--gold); padding: 15px 40px; border-radius: 50px; cursor: pointer; margin: 20px auto; display: block; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-
-        /* MODAL STYLES */
-        .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:none; justify-content:center; align-items:center; z-index:2000; }
-        .modal-content { background:white; padding:20px; border-radius:15px; width:85%; max-width:320px; text-align:center; }
-        .btn-action { background:var(--dark-blue); color:var(--gold); padding:12px; border:none; width:100%; margin-top:10px; cursor:pointer; font-weight:bold; border-radius:5px; }
-        
-        /* SCROLL BUTTONS */
-        .scroll-sticky { position:fixed; bottom:20px; right:15px; display:flex; flex-direction:column; gap:10px; }
-        .btn-scroll { width:70px; height:40px; background:var(--dark-blue); color:var(--gold); border:2px solid var(--gold); font-size:10px; cursor:pointer; border-radius:8px; font-weight:bold; }
+        body { background: #f4f4f4; font-family: sans-serif; text-align: center; }
+        .chart-container { background: #fff; width: 95%; margin: 10px auto; border: 2px solid #333; overflow-x: auto; }
+        table { border-collapse: collapse; width: 100%; min-width: 400px; }
+        th { background: #333; color: #FFD700; font-size: 11px; padding: 10px 2px; border: 1px solid #000; }
+        td { border: 1px solid #999; height: 60px; font-weight: bold; font-size: 13px; text-align: center; }
+        /* Har box mein Pana aur Jodi setting */
+        .box { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
+        .pana { font-size: 9px; color: #555; }
+        .jodi { font-size: 14px; color: #d00; }
     </style>
 </head>
 <body>
 
-<div class="header"><h1>MASTER VIP CHART</h1></div>
-
-<div class="chart-wrapper">
-    <div class="chart-container">
-        <table class="vip-table">
-            <thead><tr><th>DATE</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th></tr></thead>
-            <tbody id="chartGrid"><tr><td colspan="7">Loading...</td></tr></tbody>
-        </table>
-    </div>
-</div>
-
-<button class="btn-unlock-trigger" onclick="document.getElementById('mainModal').style.display='flex'">🔓 REMOVE LOCK</button>
-
-<div class="scroll-sticky">
-    <button onclick="window.scrollTo(0,0)" class="btn-scroll">▲ TOP</button>
-    <button onclick="window.scrollTo(0,document.body.scrollHeight)" class="btn-scroll">▼ BOTTOM</button>
-</div>
-
-<!-- Modal -->
-<div class="modal-overlay" id="mainModal">
-    <div class="modal-content" id="step1">
-        <h3>Details</h3>
-        <input type="text" id="userName" placeholder="Apna Naam" style="width:90%; padding:10px;">
-        <input type="number" id="userPhone" placeholder="Mobile Number" style="width:90%; padding:10px; margin:10px 0;">
-        <button class="btn-action" onclick="document.getElementById('step1').style.display='none'; document.getElementById('step2').style.display='block';">Pay ₹999</button>
-    </div>
-    <div class="modal-content" id="step2" style="display:none;">
-        <h3>Scan & Pay ₹999</h3>
-        <img src="paytm-qr.png.jpeg" alt="QR" style="width:150px; height:150px; border:2px dashed #000;">
-        <input type="text" id="utr" placeholder="12-Digit UTR" style="width:90%; padding:10px; margin:10px 0;">
-        <button class="btn-action" onclick="verify()">Verify Payment</button>
-    </div>
-    <div class="modal-content" id="step3" style="display:none;">
-        <h3>Verification</h3>
-        <div id="timer" style="font-size:30px; font-weight:bold; color:red;">02:00</div>
-        <div id="success" style="display:none; color:green; font-weight:bold;">🎉 SUCCESS!</div>
-    </div>
+<h3>MATKA VIP CHART</h3>
+<div class="chart-container">
+    <table>
+        <thead>
+            <tr><th>DATE</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th></tr>
+        </thead>
+        <tbody id="chartGrid"></tbody>
+    </table>
 </div>
 
 <script>
@@ -83,29 +38,19 @@
             let row = rows[i].split(',');
             if(row.length < 2) continue;
             
+            // Real chart format: Date | Pana-Jodi | Pana-Jodi ...
             html += `<tr>
-                <td>${row[0].replace(/"/g, '')}</td>
-                <td><div style="font-size:10px; color:#666;">${row[1]}</div><div style="font-size:14px; font-weight:bold;">${row[2]}</div></td>
-                <td><div style="font-size:10px; color:#666;">${row[3]}</div><div style="font-size:14px; font-weight:bold;">${row[4]}</div></td>
-                <td><div style="font-size:10px; color:#666;">${row[5]}</div><div style="font-size:14px; font-weight:bold;">${row[6]}</div></td>
-                <td><div style="font-size:10px; color:#666;">${row[7]}</div><div style="font-size:14px; font-weight:bold;">${row[8]}</div></td>
-                <td><div style="font-size:10px; color:#666;">${row[9]}</div><div style="font-size:14px; font-weight:bold;">${row[10]}</div></td>
-                <td><div style="font-size:10px; color:#666;">${row[11]}</div><div style="font-size:14px; font-weight:bold;">${row[12]}</div></td>
+                <td>${row[0].replace(/"/g,'')}</td>
+                <td><div class="box"><span class="pana">${row[1]}</span><span class="jodi">${row[2]}</span></div></td>
+                <td><div class="box"><span class="pana">${row[3]}</span><span class="jodi">${row[4]}</span></div></td>
+                <td><div class="box"><span class="pana">${row[5]}</span><span class="jodi">${row[6]}</span></div></td>
+                <td><div class="box"><span class="pana">${row[7]}</span><span class="jodi">${row[8]}</span></div></td>
+                <td><div class="box"><span class="pana">${row[9]}</span><span class="jodi">${row[10]}</span></div></td>
+                <td><div class="box"><span class="pana">${row[11]}</span><span class="jodi">${row[12]}</span></div></td>
             </tr>`;
         }
         document.getElementById('chartGrid').innerHTML = html;
     });
-
-    function verify() {
-        document.getElementById('step2').style.display = 'none';
-        document.getElementById('step3').style.display = 'block';
-        let t = 120;
-        let int = setInterval(() => {
-            let m = Math.floor(t/60), s = t%60;
-            document.getElementById('timer').innerText = (m<10?"0"+m:m)+":"+(s<10?"0"+s:s);
-            if(--t < 0) { clearInterval(int); document.getElementById('timer').style.display='none'; document.getElementById('success').style.display='block'; }
-        }, 1000);
-    }
 </script>
 </body>
 </html>
