@@ -11,12 +11,12 @@
         .header { background: var(--dark-blue); padding: 15px; border-bottom: 4px solid var(--gold); }
         .header h1 { margin: 0; font-size: 22px; color: var(--gold); text-transform: uppercase; }
 
-        .chart-wrapper { width: 92%; margin: 20px auto; }
+        .chart-wrapper { width: 95%; margin: 20px auto; }
         .chart-container { background: #fff; border: 3px solid var(--dark-blue); border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         
         .vip-table { border-collapse: collapse; width: 100%; min-width: 320px; }
-        .vip-table th { background: var(--dark-blue); color: var(--gold); font-size: 11px; padding: 12px 5px; text-transform: uppercase; }
-        .vip-table td { border-bottom: 1px solid #ddd; height: 50px; text-align: center; font-size: 14px; font-weight: bold; color: #333; }
+        .vip-table th { background: var(--dark-blue); color: var(--gold); font-size: 11px; padding: 12px 2px; text-transform: uppercase; }
+        .vip-table td { border-bottom: 1px solid #ddd; height: 55px; text-align: center; color: #333; }
         .vip-table tbody tr:nth-child(even) { background-color: #fff9f0; }
 
         .btn-unlock-trigger { background: var(--vip-red); color: white; font-size: 18px; font-weight: bold; border: 2px solid var(--gold); padding: 15px 40px; border-radius: 50px; cursor: pointer; margin: 20px auto; display: block; animation: pulse 1.5s infinite; }
@@ -29,7 +29,7 @@
         
         /* SCROLL BUTTONS */
         .scroll-sticky { position:fixed; bottom:20px; right:15px; display:flex; flex-direction:column; gap:10px; }
-        .btn-scroll { width:70px; height:40px; background:var(--dark-blue); color:var(--gold); border:2px solid var(--gold); font-size:10px; cursor:pointer; border-radius:8px; }
+        .btn-scroll { width:70px; height:40px; background:var(--dark-blue); color:var(--gold); border:2px solid var(--gold); font-size:10px; cursor:pointer; border-radius:8px; font-weight:bold; }
     </style>
 </head>
 <body>
@@ -40,7 +40,7 @@
     <div class="chart-container">
         <table class="vip-table">
             <thead><tr><th>DATE</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th></tr></thead>
-            <tbody id="chartGrid"></tbody>
+            <tbody id="chartGrid"><tr><td colspan="7">Loading...</td></tr></tbody>
         </table>
     </div>
 </div>
@@ -52,6 +52,7 @@
     <button onclick="window.scrollTo(0,document.body.scrollHeight)" class="btn-scroll">▼ BOTTOM</button>
 </div>
 
+<!-- Modal -->
 <div class="modal-overlay" id="mainModal">
     <div class="modal-content" id="step1">
         <h3>Details</h3>
@@ -60,7 +61,7 @@
         <button class="btn-action" onclick="document.getElementById('step1').style.display='none'; document.getElementById('step2').style.display='block';">Pay ₹999</button>
     </div>
     <div class="modal-content" id="step2" style="display:none;">
-        <h3>Pay ₹999</h3>
+        <h3>Scan & Pay ₹999</h3>
         <img src="paytm-qr.png.jpeg" alt="QR" style="width:150px; height:150px; border:2px dashed #000;">
         <input type="text" id="utr" placeholder="12-Digit UTR" style="width:90%; padding:10px; margin:10px 0;">
         <button class="btn-action" onclick="verify()">Verify Payment</button>
@@ -74,13 +75,23 @@
 
 <script>
     const URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart";
-    fetch(URL).then(r=>r.text()).then(data => {
+    
+    fetch(URL).then(r => r.text()).then(data => {
         const rows = data.split('\n');
         let html = '';
-        for(let i=1; i<rows.length; i++) {
-            let cols = rows[i].split(',');
-            if(cols.length < 2) continue;
-            html += '<tr>' + cols.slice(0,7).map(c => `<td>${c.replace(/"/g,'')}</td>`).join('') + '</tr>';
+        for(let i = 1; i < rows.length; i++) {
+            let row = rows[i].split(',');
+            if(row.length < 2) continue;
+            
+            html += `<tr>
+                <td>${row[0].replace(/"/g, '')}</td>
+                <td><div style="font-size:10px; color:#666;">${row[1]}</div><div style="font-size:14px; font-weight:bold;">${row[2]}</div></td>
+                <td><div style="font-size:10px; color:#666;">${row[3]}</div><div style="font-size:14px; font-weight:bold;">${row[4]}</div></td>
+                <td><div style="font-size:10px; color:#666;">${row[5]}</div><div style="font-size:14px; font-weight:bold;">${row[6]}</div></td>
+                <td><div style="font-size:10px; color:#666;">${row[7]}</div><div style="font-size:14px; font-weight:bold;">${row[8]}</div></td>
+                <td><div style="font-size:10px; color:#666;">${row[9]}</div><div style="font-size:14px; font-weight:bold;">${row[10]}</div></td>
+                <td><div style="font-size:10px; color:#666;">${row[11]}</div><div style="font-size:14px; font-weight:bold;">${row[12]}</div></td>
+            </tr>`;
         }
         document.getElementById('chartGrid').innerHTML = html;
     });
