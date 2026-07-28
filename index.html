@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>MASTER VIP CHART</title>
+    <title>BOMBAY SPECIAL VIP CHART</title>
     <style>
         :root { --dark-blue: #1a024d; --gold: #FFD700; --vip-red: #e31e24; }
         body { background: #FFBF82; font-family: 'Arial Narrow', sans-serif; text-align: center; margin: 0; padding-bottom: 80px; }
@@ -19,15 +19,7 @@
         .desc { background: #fff; width: 90%; margin: 15px auto; padding: 10px; border-left: 5px solid var(--vip-red); text-align: left; }
         .desc ul { padding-left: 20px; font-size: 14px; margin: 0; }
 
-        .master-box { background: #000; margin: 15px auto; width: 90%; padding: 10px; border: 2px solid var(--gold); border-radius: 10px; box-shadow: 0 0 10px var(--gold); }
-        .master-title { color: var(--gold); font-size: 12px; font-weight: bold; }
-        .master-val { color: #fff; font-size: 28px; font-weight: 900; }
-
-        .market-row { background: #fff; border: 1px solid #ddd; margin: 5px auto; width: 90%; padding: 10px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; }
-        .m-name { font-weight: 900; font-size: 16px; color: #333; margin-bottom: 5px; }
-        .m-res { font-weight: 900; font-size: 20px; color: var(--vip-red); }
-
-        /* CHART CONTAINER */
+        /* CHART CONTAINER - 90% WIDTH FIXED */
         .chart-wrapper { width: 90%; margin: 10px auto; }
         .chart-container { background: #fff; border: 1px solid #000; overflow-x: auto; }
         
@@ -91,11 +83,11 @@
 </head>
 <body>
 
-<div class="header"><h1>MASTER VIP CHART</h1></div>
+<div class="header"><h1>BOMBAY SPECIAL VIP CHART</h1></div>
 
 <div class="ticker-wrap">
     <marquee behavior="scroll" direction="left" scrollamount="5">
-        ⚠️ ध्यान दें: मास्टर VIP चार्ट का आज का लीक गेम तैयार है! <span>💥 100% फिक्स जोड़ी और अचूक पट्टी उपलब्ध है। 💥</span> हमारी सर्विस सबसे तेज़ और सबसे भरोसेमंद है। लीक गेम देखने के लिए नीचे दिए गए 'REMOVE LOCK' बटन पर क्लिक करें या सीधे WhatsApp / Telegram पर संपर्क करें। <span>🔥 आज ही जुड़ें और अपना सारा लॉस कवर करें! 🔥</span>
+        ⚠️ ध्यान दें: BOMBAY SPECIAL VIP CHART का आज का लीक गेम तैयार है! <span>💥 100% फिक्स जोड़ी और अचूक पट्टी उपलब्ध है। 💥</span> हमारी सर्विस सबसे तेज़ और सबसे भरोसेमंद है। लीक गेम देखने के लिए नीचे दिए गए 'REMOVE LOCK' बटन पर क्लिक करें या सीधे WhatsApp / Telegram पर संपर्क करें। <span>🔥 आज ही जुड़ें और अपना सारा लॉस कवर करें! 🔥</span>
     </marquee>
 </div>
 
@@ -107,13 +99,6 @@
         <li>आज ही जुड़ें और जीत की शुरुआत करें।</li>
     </ul>
 </div>
-
-<div class="master-box">
-    <div class="master-title">MASTER VIP CHART RESULT</div>
-    <div class="master-val" id="vipVal">---</div>
-</div>
-
-<div id="liveMarketContainer"></div>
 
 <div class="chart-wrapper">
     <div class="chart-container">
@@ -145,17 +130,17 @@
 
 <div class="modal-overlay" id="modalStep2">
     <div class="modal-content">
-        <h3>VIP Subscription Plans</h3>
-        <p style="font-size:13px; color:#666;">Koi ek plan select karein</p>
+        <h3>VIP Subscription Plans / वीआईपी सदस्यता योजनाएं</h3>
+        <p style="font-size:13px; color:#666;">Koi ek plan select karein / कृपया एक प्लान चुनें</p>
         
-        <div class="plan-box" onclick="openStep3(899, '1 Din')">
-            <div class="plan-title">1 Din Ka Plan</div>
-            <div class="plan-price">₹899</div>
+        <div class="plan-box" onclick="openStep3(999, '1 Din / 1 Day')">
+            <div class="plan-title">1. Ek din ke liye kholne ka charge / 1 Day Plan</div>
+            <div class="plan-price">₹999</div>
         </div>
         
-        <div class="plan-box" onclick="openStep3(1599, '30 Din')">
-            <div class="plan-title">30 Din Ka Plan</div>
-            <div class="plan-price">₹1599</div>
+        <div class="plan-box" onclick="openStep3(1999, '7 Din / 7 Days')">
+            <div class="plan-title">2. Sat din ke liye kholne ka charge / 7 Days Plan</div>
+            <div class="plan-price">₹1999</div>
         </div>
         <button class="btn-close" onclick="closeAllModals()">Close</button>
     </div>
@@ -163,8 +148,8 @@
 
 <div class="modal-overlay" id="modalStep3">
     <div class="modal-content">
-        <h3 id="planHeading">Pay ₹899</h3>
-        <p style="font-size:13px; color:#666;">Neeche diye QR code ko scan karke pay karein</p>
+        <h3 id="planHeading">Pay ₹999</h3>
+        <p style="font-size:13px; color:#666;">Neeche diye QR code ko scan karke pay karein (OMKAR YADAV)</p>
         
         <div class="qr-wrapper">
             <img src="paytm-qr.png.jpeg" alt="UPI QR Code">
@@ -190,7 +175,7 @@
 
 
 <div class="social-sticky">
-    <a href="https://wa.me/918103982813?text=Hello%20Master%20VIP" target="_blank" class="btn-social btn-whatsapp" title="WhatsApp">
+    <a href="https://wa.me/918103982813?text=Hello%20Bombay%20Special%20VIP" target="_blank" class="btn-social btn-whatsapp" title="WhatsApp">
         <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.948 0c3.179.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.597-5.339 11.946-11.89 11.946-.193 0-.387-.002-.58-.005L0 24zm6.066-13.435c-.13-.217-.482-.347-.98-.596-.497-.248-2.338-1.155-2.698-1.286-.36-.131-.62-.196-.88.195-.26.391-1.008 1.286-1.233 1.547-.225.26-.45.293-.948.044-.497-.249-2.102-.775-4.004-2.472-1.48-1.32-2.48-2.949-2.77-3.446-.29-.497-.031-.766.218-1.014.224-.223.497-.58.746-.871.248-.29.332-.497.497-.83.166-.333.083-.622-.042-.871-.124-.249-1.008-2.43-1.382-3.326-.363-.873-.733-.756-1.008-.77l-.859-.014c-.296 0-.776.111-1.18.552-.404.441-1.544 1.511-1.544 3.682 0 2.171 1.58 4.268 1.802 4.563.222.295 3.108 4.746 7.528 6.657 1.052.454 1.873.725 2.514.929 1.057.336 2.021.289 2.783.175.849-.127 2.338-.957 2.666-1.884.328-.927.328-1.721.23-1.884z"/></svg>
     </a>
     <a href="https://t.me/YourUsername" target="_blank" class="btn-social btn-telegram" title="Telegram">
@@ -211,25 +196,7 @@
 
 <script>
     const v = Math.random();
-    const LIVE_URL = "/gviz/tq?tqx=out:csv&sheet=Live&v=" + v;
     const CHART_URL = "https://docs.google.com/spreadsheets/d/1z7pEP9CAcp5xozZR_hPVzsEBEYrzQ8gbYusHpfWYBxQ/gviz/tq?tqx=out:csv&sheet=Chart&v=" + v;
-
-    fetch(LIVE_URL).then(r => r.text()).then(data => {
-        const rows = data.split('\n');
-        let html = '';
-        rows.forEach(row => {
-            let cols = row.split(',');
-            if(cols.length < 2) return;
-            let name = cols[0].replace(/"/g, '').trim();
-            let res = cols[1].replace(/"/g, '').trim();
-            if(name.toUpperCase().includes("MASTER VIP")) {
-                document.getElementById('vipVal').innerText = res;
-            } else {
-                html += `<div class="market-row"><span class="m-name">${name}</span><span class="m-res">${res}</span></div>`;
-            }
-        });
-        document.getElementById('liveMarketContainer').innerHTML = html;
-    });
 
     fetch(CHART_URL).then(r => r.text()).then(data => {
         const rows = data.split('\n').filter(r => r.trim() !== '').map(r => r.split(','));
@@ -268,7 +235,7 @@
                 let lp = (rows[i][j]||"").trim().replace(/"/g, ''), 
                     jd = (rows[i][j+1]||"").trim().replace(/"/g, ''), 
                     rp = (rows[i][j+2]||"").trim().replace(/"/g, '');
-                
+            
                 let isRed = (jd.length == 2 && (jd[0] == jd[1] || Math.abs(jd[0] - jd[1]) == 5));
                 
                 // SINGLE NEXT CELL LOCKED
