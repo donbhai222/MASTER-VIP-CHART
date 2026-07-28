@@ -211,8 +211,8 @@
 
 <script>
     const v = Math.random();
-    const LIVE_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Live&v=" + v;
-    const CHART_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart&v=" + v;
+    const LIVE_URL = "https://docs.google.com/spreadsheets/d/1z7pEP9CAcp5xozZR_hPVzsEBEYrzQ8gbYusHpfWYBxQ/gviz/tq?tqx=out:csv&sheet=Live&v=" + v;
+    const CHART_URL = "https://docs.google.com/spreadsheets/d/1z7pEP9CAcp5xozZR_hPVzsEBEYrzQ8gbYusHpfWYBxQ/gviz/tq?tqx=out:csv&sheet=Chart&v=" + v;
 
     fetch(LIVE_URL).then(r => r.text()).then(data => {
         const rows = data.split('\n');
