@@ -37,9 +37,7 @@
             align-items: center; 
             position: relative; 
         }
-        .header-title-box {
-            text-align: center;
-        }
+        .header-title-box { text-align: center; }
         .header h1 { 
             margin: 0; 
             font-size: 20px; 
@@ -133,8 +131,6 @@
             margin: 6px auto; 
             width: 96%; 
             max-width: 600px; 
-            border: none;
-            box-shadow: none; 
             box-sizing: border-box; 
             text-align: center;
         }
@@ -145,14 +141,11 @@
             font-weight: 600; 
             color: #0f172a; 
         }
-        .edu-note-box strong {
-            color: #15803d; 
-            font-weight: 800;
-        }
+        .edu-note-box strong { color: #15803d; font-weight: 800; }
 
         .btn-group-row { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
 
-        /* Sky Blue - Go to Buttons */
+        /* Navigation Buttons */
         .nav-btn { 
             background: var(--sky-blue); 
             color: white; 
@@ -168,7 +161,6 @@
         }
         .nav-btn:hover { background: #0284c7; }
 
-        /* Golden Neon Play Game Button */
         .btn-neon-game {
             background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
             color: #000000;
@@ -190,7 +182,7 @@
             100% { transform: scale(1.04); box-shadow: 0 0 20px rgba(251, 191, 36, 0.9); }
         }
 
-        /* Compact Chart/Market Selector Button */
+        /* Dropdown Chart Selector */
         .chart-selector-container { margin: 10px 0 6px 0; display: flex; justify-content: center; }
         .chart-select-dropdown { 
             background: #0f172a; 
@@ -203,13 +195,11 @@
             cursor: pointer; 
             outline: none;
             box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            transition: 0.3s;
             text-align: center;
             max-width: 210px;
-            width: auto;
         }
 
-        /* Chart Title Attached Above Chart */
+        /* Chart Header & Table */
         .chart-title-heading { 
             background: var(--theme-green); 
             color: #ffffff; 
@@ -225,7 +215,6 @@
             border: 2px solid #000;
             border-bottom: none;
             border-radius: 8px 8px 0 0;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         }
 
         #chartWrapper { 
@@ -244,20 +233,17 @@
         td { border: 1px solid var(--grid-border); height: 50px; background: #fff; vertical-align: middle; text-align: center; padding: 0; }
         
         .date-box { background: #e2e8f0 !important; font-size: 10px; font-weight: 700; width: 45px !important; color: #334155; }
-        .cell-content { display: flex; align-items: center; justify-content: center; width: 100%; }
-        .panna-vertical { display: flex; flex-direction: column; font-size: 8px; line-height: 0.9; width: 10px; font-weight: 700; color: #475569; }
-        .jodi { font-size: 18px; font-weight: 900; color: #0f172a; margin: 0 4px; }
-        .red-house .jodi, .red-house .panna-vertical { color: var(--vip-red) !important; }
+        .cell-content { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
         
         .lock-btn { 
             font-size: 20px; 
             cursor: pointer; 
-            display: inline-block; 
             background: transparent; 
             border: none; 
             padding: 0; 
             transition: transform 0.2s; 
         }
+        .lock-btn:hover { transform: scale(1.2); }
 
         /* Access Panel Box */
         .access-panel-box {
@@ -272,19 +258,8 @@
             box-sizing: border-box;
             text-align: center;
         }
-        .access-panel-box h2 {
-            color: #0f172a;
-            font-size: 18px;
-            font-weight: 900;
-            margin: 0 0 6px 0;
-            text-transform: uppercase;
-        }
-        .access-panel-box p {
-            color: #475569;
-            font-size: 12.5px;
-            font-weight: 600;
-            margin: 0 0 15px 0;
-        }
+        .access-panel-box h2 { color: #0f172a; font-size: 18px; font-weight: 900; margin: 0 0 6px 0; text-transform: uppercase; }
+        .access-panel-box p { color: #475569; font-size: 12.5px; font-weight: 600; margin: 0 0 15px 0; }
 
         .btn-pay-main { background: var(--theme-green); color: white; padding: 12px; border: none; border-radius: 8px; width: 100%; font-weight: 700; font-size: 15px; margin: 10px 0; cursor: pointer; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3); transition: 0.2s; box-sizing: border-box; }
         .btn-pay-main:hover { background: #15803d; }
@@ -292,16 +267,9 @@
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(5px); z-index: 10000; align-items: center; justify-content: center; }
         .modal-content { background: var(--card-bg); width: 95%; max-width: 650px; padding: 20px; border-radius: 14px; box-sizing: border-box; text-align: left; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.4); color: #1e293b; }
         
-        .qr-img { width: 160px; height: auto; border: 2px solid #cbd5e1; border-radius: 8px; margin: 10px auto; display: block; }
         input, select { width: 100%; padding: 11px 14px; margin: 8px 0; border: 1.5px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 13px; outline: none; }
         
-        /* Payment App Option Buttons Style with PhonePe and Paytm Only */
-        .upi-apps-container {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin: 12px 0;
-        }
+        .upi-apps-container { display: flex; justify-content: center; gap: 12px; margin: 12px 0; }
         .upi-app-btn {
             flex: 1;
             max-width: 130px;
@@ -314,7 +282,6 @@
             font-size: 11.5px;
             font-weight: 800;
             color: #0f172a;
-            transition: 0.2s;
             text-decoration: none;
             display: inline-flex;
             flex-direction: column;
@@ -322,50 +289,13 @@
             justify-content: center;
             gap: 6px;
         }
-        .upi-app-btn img {
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
-            border-radius: 6px;
-        }
-        .upi-app-btn:hover {
-            border-color: var(--sky-blue);
-            background: #f0f9ff;
-            transform: translateY(-2px);
-        }
 
-        /* File Input Custom Style */
-        input[type="file"] {
-            background: #f8fafc;
-            padding: 8px;
-            border: 2px dashed var(--sky-blue);
-            cursor: pointer;
-        }
-
-        .modal-header-box { 
-            background: var(--sky-blue); 
-            color: white; 
-            padding: 10px 14px; 
-            border-radius: 8px; 
-            margin-bottom: 12px; 
-            font-weight: 800; 
-            font-size: 15px; 
-            text-align: center; 
-        }
-
+        .modal-header-box { background: var(--sky-blue); color: white; padding: 10px 14px; border-radius: 8px; margin-bottom: 12px; font-weight: 800; font-size: 15px; text-align: center; }
         .notice-box { background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid var(--sky-blue); padding: 12px; border-radius: 6px; margin-bottom: 12px; font-size: 11.5px; color: #334155; line-height: 1.5; }
-        .instruction-box { background: #f1f5f9; border: 1px solid #e2e8f0; padding: 12px; border-radius: 6px; margin: 10px 0; font-size: 11.5px; color: #334155; line-height: 1.5; }
         .upi-box { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; padding: 8px 12px; border-radius: 8px; margin: 8px 0; font-size: 13px; font-weight: 700; border: 1.5px solid #cbd5e1; color: #0f172a; }
         .copy-btn { background: var(--sky-blue); color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 11px; cursor: pointer; font-weight: 600; }
-        .next-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; margin: 10px 0; font-size: 11.5px; color: #334155; }
 
-        /* Dashboard Tabs Styling */
-        .dash-tabs {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-        }
+        .dash-tabs { display: flex; gap: 4px; margin-bottom: 12px; flex-wrap: wrap; }
         .dash-tab-btn {
             flex: 1;
             min-width: 70px;
@@ -379,143 +309,47 @@
             cursor: pointer;
             transition: 0.2s;
         }
-        .dash-tab-btn.active {
-            background: var(--sky-blue);
-            color: #ffffff;
-            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.4);
-        }
+        .dash-tab-btn.active { background: var(--sky-blue); color: #ffffff; box-shadow: 0 2px 8px rgba(14, 165, 233, 0.4); }
 
-        /* 🏛️ MARKETS CARD STYLING */
-        .market-list-box {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 10px;
-        }
+        /* Market Cards Design */
         .market-card {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             background: #ffffff;
-            border: 2px solid #e2e8f0;
+            border: 1.5px solid #cbd5e1;
+            border-left: 5px solid var(--theme-green);
             border-radius: 10px;
-            padding: 10px 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            transition: 0.2s;
-        }
-        .market-card:hover {
-            border-color: var(--gold);
-        }
-        .market-clock-icon {
-            font-size: 24px;
-            cursor: pointer;
-            user-select: none;
-            background: #f1f5f9;
-            padding: 6px;
-            border-radius: 50%;
-            transition: 0.2s;
-        }
-        .market-clock-icon:hover {
-            background: #fef08a;
-            transform: scale(1.1);
-        }
-        .market-details {
-            flex: 1;
-            text-align: center;
-            padding: 0 8px;
-        }
-        .market-title {
-            font-size: 14px;
-            font-weight: 900;
-            color: #0f172a;
-            letter-spacing: 0.5px;
-        }
-        .market-status-badge {
-            display: inline-block;
-            font-size: 10.5px;
-            font-weight: 800;
-            margin-top: 3px;
-            padding: 3px 8px;
-            border-radius: 12px;
-            text-transform: uppercase;
-        }
-        .status-running {
-            background: #dcfce7;
-            color: #15803d;
-            border: 1px solid #86efac;
-        }
-        .status-closed {
-            background: #fee2e2;
-            color: #dc2626;
-            border: 1px solid #fca5a5;
-        }
-        .market-play-btn {
-            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            padding: 8px 14px;
-            font-size: 12px;
-            font-weight: 900;
-            cursor: pointer;
-            box-shadow: 0 3px 8px rgba(22, 163, 74, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .market-play-btn:hover {
-            background: #166534;
-        }
-
-        /* Rate Card Grid */
-        .rate-card-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        .rate-item {
+            padding: 12px 14px;
+            margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #f1f5f9;
-            padding: 12px 14px;
-            border-radius: 8px;
-            border-left: 4px solid var(--gold);
-            font-size: 13px;
-            font-weight: 700;
-            color: #0f172a;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         }
-        .rate-item strong {
-            color: #16a34a;
-            font-size: 14px;
-            font-weight: 900;
+        .market-info h4 { margin: 0 0 4px 0; font-size: 15px; color: #0f172a; font-weight: 800; text-transform: uppercase; }
+        .market-info .m-res { font-size: 16px; font-weight: 900; color: #dc2626; margin-bottom: 3px; letter-spacing: 1px; }
+        .market-info .m-time { font-size: 11px; font-weight: 700; color: #64748b; }
+        
+        .m-badge {
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 6px;
         }
+        .m-open { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+        .m-closed { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
 
-        /* Subscription Plans Grid */
-        .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin: 12px 0; }
-        .sub-plan-card { border: 2px solid #cbd5e1; border-radius: 10px; padding: 10px; background: linear-gradient(145deg, #ffffff, #f1f5f9); text-align: center; }
-        .sub-plan-icon { font-size: 26px; margin-bottom: 2px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)); }
-        .sub-plan-title { font-size: 12px; font-weight: 900; color: var(--dark-blue); text-transform: uppercase; }
-        .sub-plan-desc { font-size: 9.5px; font-weight: 700; color: #475569; margin: 4px 0; line-height: 1.3; }
-        .sub-plan-price { font-size: 15px; font-weight: 900; color: var(--sky-blue); margin: 6px 0; }
-        .sel-btn { background: var(--sky-blue); color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; width: 100%; }
+        .rate-card-grid { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+        .rate-item { display: flex; justify-content: space-between; align-items: center; background: #f1f5f9; padding: 12px 14px; border-radius: 8px; border-left: 4px solid var(--gold); font-size: 13px; font-weight: 700; color: #0f172a; }
+        .rate-item strong { color: #16a34a; font-size: 14px; font-weight: 900; }
 
-        .site-footer {
-            background: #0f172a;
-            color: #94a3b8;
-            padding: 16px;
-            margin-top: 30px;
-            font-size: 12px;
-            font-weight: 600;
-            border-top: 3px solid var(--gold);
-        }
+        .site-footer { background: #0f172a; color: #94a3b8; padding: 16px; margin-top: 30px; font-size: 12px; font-weight: 600; border-top: 3px solid var(--gold); }
         .site-footer span { color: var(--gold); font-weight: 800; }
     </style>
 </head>
 <body>
 
-<!-- Header with Centered Title & Right Menu Icon -->
+<!-- Header -->
 <div class="header">
     <div class="header-title-box">
         <h1>MASTER VIP CHART</h1>
@@ -564,7 +398,7 @@
     <button class="btn-neon-game" onclick="openPlayGameModal('play')">🎮 प्ले गेम / PLAY GAME</button>
 </div>
 
-<!-- Single Compact Dropdown Chart Selector Button -->
+<!-- Dropdown Chart Selector Button -->
 <div class="chart-selector-container">
     <select class="chart-select-dropdown" id="chartSelectDropdown" onchange="switchChart(this.value)">
         <option value="matka">📊 MASTER VIP CHART</option>
@@ -572,7 +406,7 @@
     </select>
 </div>
 
-<!-- Title Attached Directly Above Chart -->
+<!-- Title Above Chart -->
 <div class="chart-title-heading" id="chartTitleDisplay">MASTER VIP CHART</div>
 
 <div id="chartWrapper">
@@ -583,7 +417,9 @@
                 <th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th>
             </tr>
         </thead>
-        <tbody id="gridData"></tbody>
+        <tbody id="gridData">
+            <!-- Dynamic Chart Grid rows generated via JS -->
+        </tbody>
     </table>
 </div>
 
@@ -653,23 +489,23 @@
             <button class="dash-tab-btn" id="tabBtnWithdraw" onclick="switchDashTab('withdraw')">💸 विड्रॉल</button>
         </div>
 
-        <!-- 0. TAB: MARKETS -->
+        <!-- TAB: MARKETS (FIXED & ADDED MARKET NAMES) -->
         <div id="dashTabMarkets">
             <div class="notice-box">
                 <b>🏛️ LIVE MARKETS & TIMING:</b><br>
-                समय सारणी देखें (🕒 छूकर टाइमिंग देखें या 🎮 छूकर गेम खेलें)
+                सभी लाइव मार्केट्स की समय सारणी और हालिया रिजल्ट नीचे देखें:
             </div>
-
-            <div class="market-list-box" id="marketListContainer"></div>
+            <div class="market-list-box" id="marketListContainer">
+                <!-- Loaded via JS -->
+            </div>
         </div>
 
-        <!-- 1. TAB: GAME RATES -->
+        <!-- TAB: GAME RATES -->
         <div id="dashTabRates" style="display:none;">
             <div class="notice-box">
                 <b>📊 GAME RATES / गेम रेट सूची:</b><br>
                 हमारे गेमिंग प्लेटफार्म पर आपको मिलने वाले बेस्ट रेट्स:
             </div>
-
             <div class="rate-card-grid">
                 <div class="rate-item">
                     <span>1. Single Ank (सिंगल अंक)</span>
@@ -688,11 +524,10 @@
                     <strong>₹100 = ₹60,000</strong>
                 </div>
             </div>
-
             <button class="btn-pay-main" style="margin-top: 15px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color:#000;" onclick="switchDashTab('play')">अभी गेम खेलें 🚀</button>
         </div>
 
-        <!-- 2. TAB: PLAY GAME -->
+        <!-- TAB: PLAY GAME -->
         <div id="dashTabPlay" style="display:none;">
             <div id="gameFormView">
                 <div class="notice-box">
@@ -702,10 +537,10 @@
 
                 <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Game Type / गेम का प्रकार:</label>
                 <select id="gameTypeSelect">
-                    <option value="Single Ank (100 -> 1000)">1. Single Ank (सिंगल अंक)</option>
-                    <option value="Jodi Rate (100 -> 10000)">2. Jodi Rate (जोड़ी)</option>
-                    <option value="Double Panna (100 -> 30000)">3. Double Panna (डबल पाना)</option>
-                    <option value="Single Panna (100 -> 60000)">4. Single Panna (सिंगल पाना)</option>
+                    <option value="Single Ank">1. Single Ank (सिंगल अंक)</option>
+                    <option value="Jodi Rate">2. Jodi Rate (जोड़ी)</option>
+                    <option value="Double Panna">3. Double Panna (डबल पाना)</option>
+                    <option value="Single Panna">4. Single Panna (सिंगल पाना)</option>
                 </select>
 
                 <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Enter Number / अंक दर्ज करें:</label>
@@ -718,17 +553,16 @@
             </div>
         </div>
 
-        <!-- 3. TAB: ADD FUND -->
+        <!-- TAB: ADD FUND -->
         <div id="dashTabFund" style="display:none;">
             <div class="notice-box">
                 <b>💰 ADD FUND / वॉलेट बैलेंस जोड़ें:</b><br>
                 फंड जोड़ने या गेम खेलने के लिए नया खाता बनाएँ।
             </div>
-
             <button class="btn-pay-main" style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color:#fff;" onclick="proceedToFundPay()">खाता बनाएँ / CREATE ACCOUNT 🔑</button>
         </div>
 
-        <!-- 4. TAB: WITHDRAWAL -->
+        <!-- TAB: WITHDRAWAL -->
         <div id="dashTabWithdraw" style="display:none;">
             <div class="notice-box">
                 <b>💸 WITHDRAW MONEY / पैसे निकालें:</b><br>
@@ -757,7 +591,6 @@
 <!-- VIP ACCESS & ACCOUNT MODAL -->
 <div id="vipModal" class="overlay">
     <div class="modal-content">
-        <!-- Step 1: Create Account -->
         <div id="step-create-account">
             <div class="modal-header-box" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                 <span style="font-size: 16px;">CREATE ACCOUNT / नया खाता बनाएं</span>
@@ -779,7 +612,6 @@
             <button class="btn-pay-main" style="background: #64748b; margin-top: 4px;" onclick="closeVipModal()">बंद करें (Close)</button>
         </div>
 
-        <!-- Step 2: Payment Step (Hidden by Default) -->
         <div id="step-payment" style="display: none;">
             <div class="modal-header-box" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                 <span style="font-size: 16px;">COMPLETE ACTIVATION / एक्टिवेशन पूरा करें</span>
@@ -798,12 +630,8 @@
             </div>
 
             <div class="upi-apps-container">
-                <a href="phonepe://pay" class="upi-app-btn">
-                    <span>PhonePe</span>
-                </a>
-                <a href="paytmmp://pay" class="upi-app-btn">
-                    <span>Paytm</span>
-                </a>
+                <a href="phonepe://pay" class="upi-app-btn"><span>PhonePe</span></a>
+                <a href="paytmmp://pay" class="upi-app-btn"><span>Paytm</span></a>
             </div>
 
             <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Upload Payment Screenshot / स्क्रीनशॉट अपलोड करें:</label>
@@ -816,6 +644,74 @@
 </div>
 
 <script>
+    // 📊 CHART RENDER FUNCTION
+    function renderChartGrid() {
+        const gridData = document.getElementById('gridData');
+        if (!gridData) return;
+        
+        let htmlContent = '';
+        const weeks = ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8'];
+        
+        weeks.forEach(week => {
+            htmlContent += `
+                <tr>
+                    <td class="date-box">${week}</td>
+                    <td><div class="cell-content"><button class="lock-btn" onclick="openVipModal()" title="Unlock Data">🔒</button></div></td>
+                    <td><div class="cell-content"><button class="lock-btn" onclick="openVipModal()" title="Unlock Data">🔒</button></div></td>
+                    <td><div class="cell-content"><button class="lock-btn" onclick="openVipModal()" title="Unlock Data">🔒</button></div></td>
+                    <td><div class="cell-content"><button class="lock-btn" onclick="openVipModal()" title="Unlock Data">🔒</button></div></td>
+                    <td><div class="cell-content"><button class="lock-btn" onclick="openVipModal()" title="Unlock Data">🔒</button></div></td>
+                    <td><div class="cell-content"><button class="lock-btn" onclick="openVipModal()" title="Unlock Data">🔒</button></div></td>
+                </tr>
+            `;
+        });
+        
+        gridData.innerHTML = htmlContent;
+    }
+
+    // 🏛️ MARKET LIST RENDER FUNCTION (NEWLY ADDED & FIXED)
+    function renderMarketList() {
+        const mContainer = document.getElementById('marketListContainer');
+        if (!mContainer) return;
+
+        const markets = [
+            { name: "SRIDEVI DAY", res: "234-90-127", openTime: "11:35 AM", closeTime: "12:35 PM", isOpen: true },
+            { name: "TIME BAZAR", res: "128-15-348", openTime: "01:10 PM", closeTime: "02:10 PM", isOpen: true },
+            { name: "MADHUR DAY", res: "356-42-679", openTime: "01:30 PM", closeTime: "02:30 PM", isOpen: true },
+            { name: "KALYAN", res: "140-58-260", openTime: "03:45 PM", closeTime: "05:45 PM", isOpen: true },
+            { name: "RAJDHANI NIGHT", res: "678-19-234", openTime: "09:30 PM", closeTime: "11:45 PM", isOpen: false },
+            { name: "MAIN BAZAR", res: "159-55-249", openTime: "09:40 PM", closeTime: "12:05 AM", isOpen: false }
+        ];
+
+        let html = '';
+        markets.forEach(m => {
+            const badgeClass = m.isOpen ? 'm-open' : 'm-closed';
+            const badgeText = m.isOpen ? '🟢 OPEN FOR BET' : '🔴 CLOSED';
+            
+            html += `
+                <div class="market-card">
+                    <div class="market-info">
+                        <h4>${m.name}</h4>
+                        <div class="m-res">${m.res}</div>
+                        <div class="m-time">⏰ Open: ${m.openTime} | Close: ${m.closeTime}</div>
+                    </div>
+                    <div>
+                        <span class="m-badge ${badgeClass}">${badgeText}</span><br>
+                        <button class="nav-btn" style="padding: 5px 12px; font-size: 11px;" onclick="switchDashTab('play')">PLAY</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        mContainer.innerHTML = html;
+    }
+
+    // Auto Load Data on Startup
+    window.addEventListener('DOMContentLoaded', () => {
+        renderChartGrid();
+        renderMarketList();
+    });
+
     // Menu Controls
     function toggleSideMenu() {
         const menu = document.getElementById('sideMenu');
@@ -830,7 +726,7 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Modal Display Handlers
+    // Modals Handlers
     function openProfileModal() {
         if (document.getElementById('sideMenu').style.display === 'block') toggleSideMenu();
         document.getElementById('profileModal').style.display = 'flex';
@@ -861,7 +757,7 @@
         openVipModal();
     }
 
-    // Modal Tabs Navigation
+    // Tabs Switcher
     function switchDashTab(tabKey) {
         const tabs = ['markets', 'play', 'rates', 'fund', 'withdraw'];
         tabs.forEach(tab => {
@@ -900,6 +796,7 @@
             'diamond': 'ROYAL MATKA CHART'
         };
         document.getElementById('chartTitleDisplay').innerText = titleMap[val] || 'VIP CHART';
+        renderChartGrid();
     }
 
     function submitGamePlay() {
